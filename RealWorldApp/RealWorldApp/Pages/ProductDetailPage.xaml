@@ -2,15 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
+             xmlns:models="clr-namespace:RealWorldApp.Models"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.ProductDetailPage"
              BackgroundColor="FloralWhite">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ProductDetailPageVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout x:DataType="models:Product">
                 <Grid>
-                    <Image x:Name="ImgProduct"
+                    <Image Source="{Binding CurrentProduct.FullImageUrl}"
                            Aspect="Fill"
                            HeightRequest="300" />
                     <Image Source="close"
@@ -26,7 +32,7 @@
                 </Grid>
                 <StackLayout Margin="20">
                     <StackLayout Orientation="Horizontal">
-                        <Label x:Name="LblName"
+                        <Label Text="{Binding CurrentProduct.Name}"
                                TextColor="#80574D"
                                HorizontalOptions="Start"
                                FontSize="Large" />
@@ -36,7 +42,7 @@
                             <Label Text="ZAR"
                                    TextColor="#80574D"
                                    FontSize="Large" />
-                            <Label x:Name="LblPrice"
+                            <Label Text="{Binding CurrentProduct.Price}"
                                    TextColor="#80574D"
                                    FontSize="Large" />
                             
@@ -46,33 +52,13 @@
                            TextColor="#B00905"
                            FontSize="Large"
                            Margin="0,10,0,0" />
-                    <Label x:Name="LblDetail"
+                    <Label Text="{Binding CurrentProduct.Description}"
                            TextColor="#80574D"
                            FontSize="Body" />
                 </StackLayout>
-                <StackLayout Spacing="20"
-                             Orientation="Horizontal"
-                             VerticalOptions="EndAndExpand"
-                             HorizontalOptions="CenterAndExpand"
-                             Margin="0,0,0,40">
-                    <Image HeightRequest="40"
-                           Source="minus.png">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="TapDecrement" Tapped="TapDecrement_Tapped"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Label x:Name="LblQty"
-                           Text="1"
-                           FontSize="Large"
-                           TextColor="#80574D"
-                           VerticalTextAlignment="Center" />
-                    <Image HeightRequest="40"
-                           Source="plus.png">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="TapIncrement" Tapped="TapIncrement_Tapped"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
+
+                <Stepper Margin="0,0,0,40" VerticalOptions="EndAndExpand"
+                             HorizontalOptions="CenterAndExpand" Value="{Binding CurrentProduct.Quantity, Mode=TwoWay}" Increment="1" Minimum="1" Maximum="1000"/>
                 <StackLayout Orientation="Horizontal">
                     <StackLayout HorizontalOptions="FillAndExpand"
                                  Margin="30,0,0,10">
@@ -84,7 +70,7 @@
                             <Label Text="ZAR"
                                    TextColor="#80574D"
                                    FontSize="Medium" />
-                            <Label x:Name="LblTotalPrice"
+                            <Label Text="{Binding CurrentProduct.TotalPrice, Mode=TwoWay}"
                                    TextColor="#80574D"
                                    FontSize="Medium" />
                             
@@ -96,7 +82,7 @@
                             CornerRadius="30"
                             BackgroundColor="#CE0B06"
                             TextColor="White" 
-                            Clicked="BtnAddToCart_Clicked"/>
+                            Command="{Binding AddCartCommand}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

@@ -22,21 +22,6 @@ namespace RealWorldApp.Pages
         {
             Navigation.PopModalAsync();
         }
-
-        private async void BtnLogin_Clicked(object sender, EventArgs e)
-        {
-            var response = await ApiService.Login(EntEmail.Text, EntPassword.Text);
-            Preferences.Set("email", EntEmail.Text);
-            Preferences.Set("password", EntPassword.Text);
-
-            if (response)
-            {
-                Application.Current.MainPage = new NavigationPage(new HomePage());
-            }
-            else
-            {
-                await DisplayAlert("Oops", "Something went wrong", "Cancel");
-            }
-        }
+       
     }
 }

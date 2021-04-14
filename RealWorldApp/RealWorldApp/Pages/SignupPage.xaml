@@ -2,77 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.SignupPage"
              BackgroundImageSource="backg.jpg"
              BackgroundColor="#9bb891"
              NavigationPage.HasNavigationBar="False">
-    <!--<ContentPage.Content>
-        <ScrollView>
-            <StackLayout Spacing="20"
-                         Margin="25">
-                <Label TextColor="#CE0B06"
-                       Text="SIGN UP"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"
-                       Margin="30,0,30,0" />
-                <Frame HasShadow="True"
-                       Padding="25"
-                       Margin="0,30,0,0">
-                    <StackLayout>
-                        <Label Text="Create An Account"
-                               FontAttributes="Bold"
-                               FontSize="Title"
-                               HorizontalOptions="Center"
-                               TextColor="#CE0B06" />
-                        <Entry Placeholder="Full Name"
-                               PlaceholderColor="#80574D"
-                               TextColor="#80574D"
-                               x:Name="EntName"
-                               Keyboard="Text" />
-                        <Entry Placeholder="Email"
-                               PlaceholderColor="#80574D"
-                               TextColor="#80574D"
-                               x:Name="EntEmail"
-                               Keyboard="Email" />
-                        <Entry Placeholder="Password"
-                               PlaceholderColor="#80574D"
-                               TextColor="#80574D"
-                               IsPassword="True"
-                               x:Name="EntPassword"
-                               Keyboard="Default" />
-                        <Entry Placeholder="Confirm Password"
-                               PlaceholderColor="#80574D"
-                               TextColor="#80574D"
-                               IsPassword="True"
-                               x:Name="EntConfirmPassword"
-                               Keyboard="Default" />
-                        <Label Margin="20,0,20,0"
-                               FontSize="Small"
-                               HorizontalTextAlignment="Center"
-                               TextColor="#80574D"
-                               Text="By creating an account you agree to our Terms of Service and Privacy Policy" />
-                    </StackLayout>
-                </Frame>
-                <Button Text="CONTINUE"
-                        TextColor="White"
-                        BackgroundColor="#CE0B06"
-                        x:Name="BtnSignUp"
-                        Clicked="BtnSignUp_Clicked"/>
-                <Label Text="Already have an account?"
-                       HorizontalTextAlignment="Center"
-                       TextColor="#80574D" />
-                <Button Text="Login"
-                        BackgroundColor="#CE0B06"
-                        TextColor="White"
-                        x:Name="BtnLogin" 
-                        Clicked="BtnLogin_Clicked"/>
-            </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>-->
-
+    
+    <ContentPage.BindingContext>
+        <viewmodels:SignupPageVM/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="20" Margin="25">
@@ -97,8 +37,7 @@
                                PlaceholderColor="#715f73"
                                HorizontalTextAlignment="Start"
                                TextColor="#715f73"
-                               x:Name="EntName"
-                               Keyboard="Text" />
+                               Keyboard="Text" Text="{Binding RegisterData.DisplayName, Mode=TwoWay}" />
                         </Frame>
                         <Frame HasShadow="True"
                            Padding="5"
@@ -108,8 +47,7 @@
                                PlaceholderColor="#715f73"
                                HorizontalTextAlignment="Start"
                                TextColor="#715f73"
-                               x:Name="EntEmail"
-                               Keyboard="Email" />
+                               Keyboard="Email" Text="{Binding RegisterData.Email, Mode=TwoWay}"/>
                         </Frame>
                         <Frame HasShadow="True"
                                Padding="5"
@@ -120,8 +58,7 @@
                                HorizontalTextAlignment="Start"
                                TextColor="#715f73"
                                IsPassword="True"
-                               x:Name="EntPassword"
-                               Keyboard="Default" />
+                               Keyboard="Default" Text="{Binding RegisterData.Password, Mode=TwoWay}" />
                         </Frame>
                         <Frame HasShadow="True"
                                Padding="5"
@@ -132,8 +69,7 @@
                                HorizontalTextAlignment="Start"
                                TextColor="#715f73"
                                IsPassword="True"
-                               x:Name="EntConfirmPassword"
-                               Keyboard="Default" />
+                               Keyboard="Default" Text="{Binding TempPassword, Mode=TwoWay}" />
                         </Frame>
 
                         <Label Margin="20,0,20,0"
@@ -147,7 +83,8 @@
                         TextColor="White"
                         CornerRadius="30"
                         BackgroundColor="#CE0B06"
-                        x:Name="BtnSignUp" Clicked="BtnSignUp_Clicked" />
+                        Command="{Binding SignUpCommand}"/>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
                 <Label Text="Already have an account?"
                        HorizontalTextAlignment="Center"
                        TextColor="#3c343d" />
@@ -155,7 +92,7 @@
                         BackgroundColor="#CE0B06"
                         TextColor="White"
                         CornerRadius="30"
-                        x:Name="BtnLogin" Clicked="BtnLogin_Clicked" />
+                        Command="{Binding LoginCommand}"/>
 
             </StackLayout>
 

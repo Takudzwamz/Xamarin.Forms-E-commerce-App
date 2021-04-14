@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.ProductListPage"
              BackgroundColor="FloralWhite">
+
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="20">
@@ -21,14 +22,14 @@
                         <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label x:Name="LblCategoryName"
+                <Label Text="{Binding CategoryName}"
                        Grid.Column="1"
                        TextColor="#CE0B06"
                        FontSize="Large"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center" />
             </Grid>
-            <CollectionView x:Name="CvProducts"
+            <CollectionView ItemsSource="{Binding ProductByCategoryCollection}"
                             SelectionMode="Single"
                             SelectionChanged="CvProducts_SelectionChanged">
                 <CollectionView.ItemsLayout>

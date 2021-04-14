@@ -2,10 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.OrderDetailPage"
              BackgroundColor="FloralWhite">
+    <!--<ContentPage.BindingContext>
+        <viewmodels:OrderDetailPageVM/>
+    </ContentPage.BindingContext>-->
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="20">
@@ -29,7 +32,7 @@
                        HorizontalTextAlignment="Center" />
             </Grid>
             <ListView HasUnevenRows="True"
-                      x:Name="LvOrderDetail"
+                      ItemsSource="{Binding OrderDetailCollection}"
                       SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -50,7 +53,7 @@
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
-                                               Text="{Binding qty}" />
+                                               Text="{Binding Quantity}" />
                                     </StackLayout>
                                     <StackLayout Grid.Column="1">
                                         <Label Text="Unit Price"
@@ -58,7 +61,7 @@
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
-                                               Text="{Binding price,StringFormat='x {0}'}" />
+                                               Text="{Binding Price,StringFormat='x {0}'}" />
                                     </StackLayout>
                                     <StackLayout Grid.Column="2">
                                         <Label Text="Sub Total"
@@ -66,7 +69,7 @@
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
-                                               Text="{Binding totalAmount , StringFormat='ZAR {0}'}"/>
+                                               Text="{Binding TotalAmount , StringFormat='ZAR {0}'}"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>
@@ -80,7 +83,7 @@
                                FontSize="Medium"
                                TextColor="#CE0B06" />
                         <Label HorizontalOptions="End"
-                               x:Name="LblTotalPrice"
+                               Text="{Binding TotalPrice}"
                                FontSize="Medium"
                                TextColor="#80574D" />
                     </StackLayout>

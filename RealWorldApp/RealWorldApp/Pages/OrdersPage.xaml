@@ -2,10 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.OrdersPage"
              BackgroundColor="FloralWhite">
+    <ContentPage.BindingContext>
+        <viewmodels:OrdersPageVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="20">
@@ -28,7 +31,7 @@
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center" />
             </Grid>
-            <ListView x:Name="LvOrders"
+            <ListView ItemsSource="{Binding OrdersCollection}"
                       HasUnevenRows="True"
                       ItemSelected="LvOrders_ItemSelected">
                 <ListView.ItemTemplate>
@@ -40,13 +43,13 @@
                                         <Label Text="Order No."
                                                TextColor="Gray" />
                                         <Label TextColor="#CE0B06"
-                                               Text="{Binding id}"/>
+                                               Text="{Binding Id}"/>
                                     </StackLayout>
                                     <StackLayout HorizontalOptions="EndAndExpand">
                                         <Label Text="Made on"
                                                TextColor="Gray" />
                                         <Label TextColor="Black"
-                                               Text="{Binding orderPlaced}"/>
+                                               Text="{Binding OrderDate}"/>
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
@@ -54,7 +57,7 @@
                                            TextColor="Black" />
                                     <Label  HorizontalOptions="EndAndExpand"
                                             TextColor="Black"
-                                            Text="{Binding orderTotal,StringFormat='ZAR {0}'}"/>
+                                            Text="{Binding Total,StringFormat='ZAR {0}'}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.PlaceOrderPage"
              BackgroundColor="FloralWhite"
              >
+
+    <!--<ContentPage.BindingContext>
+        <viewmodels:PlaceOrderPageVM/>
+    </ContentPage.BindingContext>-->
     <ContentPage.Content>
         <StackLayout Spacing="20"
                      Margin="25">
@@ -42,29 +46,33 @@
                            FontSize="Large"
                            HorizontalTextAlignment="Center"
                            TextColor="#CE0B06" />
-                    <Entry Placeholder="Name"
+                    <Entry Placeholder="First Name"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
-                           x:Name="EntName"
+                           Text="{Binding CurrentAddress.FirstName, Mode=TwoWay}"
+                           Keyboard="Text" />
+                    <Entry Placeholder="Last Name"
+                           PlaceholderColor="#80574D"
+                           TextColor="#80574D"
+                           Text="{Binding CurrentAddress.LastName, Mode=TwoWay}"
                            Keyboard="Text" />
                     <Entry Placeholder="Phone"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
-                           x:Name="EntPhone"
+                           Text="{Binding CurrentAddress.PhoneNumber, Mode=TwoWay}"
                            Keyboard="Numeric" />
                     <Editor Placeholder="Address"
                             HeightRequest="100"
                             PlaceholderColor="#80574D"
                             TextColor="#80574D"
-                            x:Name="EntAddress"
+                           Text="{Binding CurrentAddress.Street, Mode=TwoWay}"
                             Keyboard="Default" />
                 </StackLayout>
             </Frame>
             <Button Text="Place My Order"
                     BackgroundColor="#CE0B06"
                     TextColor="White"
-                    x:Name="BtnPlaceOrder" 
-                    Clicked="BtnPlaceOrder_Clicked"/>
+                   Command="{Binding OrderCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

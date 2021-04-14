@@ -6,14 +6,15 @@ namespace RealWorldApp.Models
 {
     public class Order
     {
-        public int id { get; set; }
-        public string fullName { get; set; }
-        public string address { get; set; }
-        public string phone { get; set; }
-        public double orderTotal { get; set; }
-        public DateTime orderPlaced { get; set; }
-        public bool isOrderCompleted { get; set; }
-        public int userId { get; set; }
-        public List<OrderDetail> orderDetails { get; set; }
+        public int Id { get; set; }
+        public string BuyerEmail { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
+        public Address ShipToAddress { get; set; }
+        public string DeliveryMethod { get; set; }
+        public decimal ShippingPrice { get; set; }
+        public IReadOnlyList<OrderItemDto> OrderItems { get; set; }
+        public double Subtotal { get; set; }
+        public double Total { get; set; }
+        public string Status { get; set; }
     }
 }

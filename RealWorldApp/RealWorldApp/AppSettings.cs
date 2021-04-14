@@ -6,7 +6,7 @@ namespace RealWorldApp
 {
     public static class AppSettings
     {
-        public static string ApiUrl = "https://foodapi-fi2.conveyor.cloud/";
-       // public static string ApiUrl = "http://192.168.8.102:45455/";
+        public const string ApiUrl = "https://foodapi-fi2.conveyor.cloud/";
+       // public const string ApiUrl = "http://192.168.8.102:45455/";
     }
 }

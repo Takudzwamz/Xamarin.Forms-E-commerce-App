@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.CartPage"
              BackgroundColor="FloralWhite">
+
+    <ContentPage.BindingContext>
+        <viewmodels:CartPageVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <Grid Margin="20">
@@ -36,11 +40,11 @@
                        VerticalTextAlignment="End"
                        HorizontalTextAlignment="Center">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="TapClearCart" Tapped="TapClearCart_Tapped" />
+                        <TapGestureRecognizer Command="{Binding ClearCartCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-            <ListView x:Name="LvShoppingCart"
+            <ListView ItemsSource="{Binding ShoppingCartCollection}"
                       SelectionMode="None"
                       CachingStrategy="RecycleElement"
                       HasUnevenRows="True"
@@ -87,7 +91,7 @@
                         <Label Text="ZAR"
                                TextColor="#80574D"
                                FontSize="Medium" />
-                        <Label x:Name="LblTotalPrice"
+                        <Label x:Name="LblTotalPrice" Text="{Binding TotalPrice, Mode=TwoWay}"
                                TextColor="#80574D"
                                FontSize="Medium" />
                         

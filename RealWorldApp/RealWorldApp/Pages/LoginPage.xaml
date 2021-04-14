@@ -2,13 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.LoginPage"
              BackgroundImageSource="backg.jpg"
              BackgroundColor="#9bb891"
              NavigationPage.HasNavigationBar="False">
-
+    <ContentPage.BindingContext>
+        <viewmodels:LoginPageVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout Spacing="20"
                      Margin="25">
@@ -53,7 +55,7 @@
                            PlaceholderColor="#715f73"
                            HorizontalTextAlignment="Start"
                            TextColor="#715f73"
-                           x:Name="EntEmail"
+                           Text="{Binding LoginData.Email, Mode=TwoWay}"
                            Keyboard="Email" />
                     </Frame>
                     <Frame HasShadow="True"
@@ -65,7 +67,7 @@
                            HorizontalTextAlignment="Start"
                            TextColor="#715f73"
                            IsPassword="True"
-                           x:Name="EntPassword"
+                          Text="{Binding LoginData.Password,Mode=TwoWay}"
                            Keyboard="Default" />
                     </Frame>
 
@@ -75,7 +77,7 @@
                     BackgroundColor="#CE0B06"
                     TextColor="White"
                     CornerRadius="30"
-                    x:Name="BtnLogin" Clicked="BtnLogin_Clicked"/>
+                    Command="{Binding LoginCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 

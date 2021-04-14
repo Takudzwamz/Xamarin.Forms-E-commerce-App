@@ -17,7 +17,7 @@ namespace RealWorldApp.Services
         {
             var register = new Register()
             {
-                Name = name,
+                DisplayName = name,
                 Email = email,
                 Password = password
             };
@@ -109,13 +109,13 @@ namespace RealWorldApp.Services
             return JsonConvert.DeserializeObject<CartSubTotal>(response);
         }
 
-        public static async Task<List<ShoppingCartItem>> GetShoppingCartItems(int userId)
+        public static async Task<List<CartItem>> GetShoppingCartItems(int userId)
         {
             await TokenValidator.CheckTokenValidity();
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/ShoppingCartItems/" + userId);
-            return JsonConvert.DeserializeObject<List<ShoppingCartItem>>(response);
+            return JsonConvert.DeserializeObject<List<CartItem>>(response);
         }
 
         public static async Task<TotalCartItem> GetTotalCartItems(int userId)

@@ -1,5 +1,6 @@
 ﻿using RealWorldApp.Models;
 using RealWorldApp.Services;
+using RealWorldApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,26 +16,14 @@ namespace RealWorldApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderDetailPage : ContentPage
     {
-        public ObservableCollection<OrderDetail> OrderDetailCollection;
+        private OrderDetailPageVM viewModel;
         public OrderDetailPage(int orderId)
         {
             InitializeComponent();
-            OrderDetailCollection = new ObservableCollection<OrderDetail>();
-            GetOrderDetail(orderId);
+            viewModel = new OrderDetailPageVM(orderId);
+            this.BindingContext = viewModel;
         }
-        private async void GetOrderDetail(int orderId)
-        {
-            var orders = await ApiService.GetOrderDetails(orderId);
-            var orderDetails = orders[0].orderDetails;
-            foreach (var item in orderDetails)
-            {
-                OrderDetailCollection.Add(item);
-            }
-
-            LvOrderDetail.ItemsSource = OrderDetailCollection;
-
-            LblTotalPrice.Text = " ZAR " + orders[0].orderTotal ;
-        }
+       
 
         private void TapBack_Tapped(object sender, EventArgs e)
         {

@@ -2,14 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.HomePage"
              BackgroundColor="FloralWhite"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewmodels:HomePageVM/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
-            <CollectionView x:Name="CvProducts"
+            <CollectionView ItemsSource="{Binding ProductsCollection}"
                             SelectionMode="Single"
                             SelectionChanged="CvProducts_SelectionChanged">
                 <CollectionView.ItemsLayout>
@@ -22,7 +25,7 @@
                                Text="Our Menu"
                                TextColor="Black"
                                FontSize="Medium" />
-                        <CollectionView  x:Name="CvCategories"
+                        <CollectionView ItemsSource="{Binding CategoriesCollection}"
                                          HeightRequest="130"
                                          SelectionMode="Single"
                                          SelectionChanged="CvCategories_SelectionChanged">
@@ -83,12 +86,12 @@
                                    HeightRequest="200"
                                    WidthRequest="200"
                                    Source="{Binding FullImageUrl}"/>
-                                
-                                
+
+
                             </Frame>
-                            
-                            
-                            
+
+
+
                             <Label TextColor="#000000"
                                    HorizontalTextAlignment="Center"
                                    Text="{Binding name}"/>
@@ -158,7 +161,7 @@
                                Grid.Column="1"
                                Grid.RowSpan="2"
                                BackgroundColor="#CE0B06">
-                            <Label x:Name="LblTotalItems"
+                            <Label Text="{Binding TotalItems}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"
                                    HeightRequest="25"
@@ -206,7 +209,7 @@
                             <Label Text="Welcome"
                                    FontSize="Large"
                                    TextColor="White" />
-                            <Label x:Name="LblUserName"
+                            <Label Text="{Binding UserName}"
                                    FontSize="Small"
                                    TextColor="White" />
                         </StackLayout>

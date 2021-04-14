@@ -1,4 +1,6 @@
-﻿using RealWorldApp.Pages;
+﻿using RealWorldApp.Helpers;
+using RealWorldApp.Pages;
+using RealWorldApp.Services;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -12,16 +14,16 @@ namespace RealWorldApp
         {
             InitializeComponent();
 
-            var accesstoken = Preferences.Get("accessToken", string.Empty);
-            if (string.IsNullOrEmpty(accesstoken))
-            {
-                MainPage = new NavigationPage(new SignupPage());
-            }
-            else
+            DependencyService.Register<APIDataStore>();
+
+            if (Preferences.ContainsKey(Constants.AccessToken))
             {
                 MainPage = new NavigationPage(new HomePage());
             }
-
+            else
+            {
+                MainPage = new NavigationPage(new SignupPage());
+            }          
         }
 
         protected override void OnStart()
