@@ -37,6 +37,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public ProductDetailPageVM(int productId)
         {
+            CurrentProduct = new Product();
             ProductId = productId;
             AddCartCommand = new Command(AddToCartNow);
 

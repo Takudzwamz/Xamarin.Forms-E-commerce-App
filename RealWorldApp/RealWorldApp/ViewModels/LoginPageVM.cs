@@ -29,6 +29,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public LoginPageVM()
         {
+            LoginData = new Login();
             LoginCommand = new Command(LoginNow, CanLogin);
         }
 

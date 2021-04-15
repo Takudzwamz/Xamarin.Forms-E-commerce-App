@@ -39,6 +39,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public PlaceOrderPageVM(double totalPrice)
         {
+            CurrentAddress = new Address();
             TotalPrice = totalPrice;
             OrderCommand = new Command(PlaceOrderNow);
         }

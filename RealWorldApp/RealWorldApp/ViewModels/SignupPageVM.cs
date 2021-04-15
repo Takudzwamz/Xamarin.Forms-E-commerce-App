@@ -45,6 +45,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public SignupPageVM()
         {
+            RegisterData = new Register();
             SignUpCommand = new Command(SignUp, CanSignUp);
             LoginCommand = new Command(GotoLogin);
         }
