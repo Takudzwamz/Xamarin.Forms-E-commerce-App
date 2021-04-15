@@ -36,6 +36,11 @@ namespace RealWorldApp.Helpers
             {
                 public const string Orders_ = "orders";
             }
+            public class Payments
+            {
+
+                public const string PayFast = "payments/pay";
+            }
         }
     }
 }

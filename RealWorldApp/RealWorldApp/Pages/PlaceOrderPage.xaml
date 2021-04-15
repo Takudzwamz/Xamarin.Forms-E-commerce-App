@@ -61,12 +61,27 @@
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.PhoneNumber, Mode=TwoWay}"
                            Keyboard="Numeric" />
-                    <Editor Placeholder="Address"
+                    <Entry Placeholder="Street"
+                           PlaceholderColor="#80574D"
+                           TextColor="#80574D"
+                           Text="{Binding CurrentAddress.Street, Mode=TwoWay}"
+                           Keyboard="Text" />
+                    <Entry Placeholder="City"
                             HeightRequest="100"
                             PlaceholderColor="#80574D"
                             TextColor="#80574D"
-                           Text="{Binding CurrentAddress.Street, Mode=TwoWay}"
-                            Keyboard="Default" />
+                           Text="{Binding CurrentAddress.City, Mode=TwoWay}"
+                            Keyboard="Text" />
+                    <Entry Placeholder="State"
+                           PlaceholderColor="#80574D"
+                           TextColor="#80574D"
+                           Text="{Binding CurrentAddress.State, Mode=TwoWay}"
+                           Keyboard="Text" />
+                    <Entry Placeholder="ZipCode"
+                           PlaceholderColor="#80574D"
+                           TextColor="#80574D"
+                           Text="{Binding CurrentAddress.Zipcode, Mode=TwoWay}"
+                           Keyboard="Numeric" />
                 </StackLayout>
             </Frame>
             <Button Text="Place My Order"

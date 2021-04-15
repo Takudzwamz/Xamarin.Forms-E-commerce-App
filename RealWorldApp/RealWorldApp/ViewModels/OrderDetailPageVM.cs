@@ -49,13 +49,26 @@ namespace RealWorldApp.ViewModels
         #region methods
         private async void GetOrderDetail(int orderId)
         {
-            Order order = await DataStore.GetOrderById(orderId);
-            foreach (var item in order.OrderItems)
+            try
             {
-                OrderDetailCollection.Add(item);
-            }
+                IsBusy = true;
+                await Task.Delay(100);
+                Order order = await DataStore.GetOrderById(orderId);
+                foreach (var item in order.OrderItems)
+                {
+                    OrderDetailCollection.Add(item);
+                }
 
-            TotalPrice = " ZAR " + order.Total;
+                TotalPrice = " ZAR " + order.Total;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         #endregion
     }

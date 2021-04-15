@@ -1,9 +1,7 @@
 ﻿using RealWorldApp.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -53,33 +51,63 @@ namespace RealWorldApp.ViewModels
 
         private async void LoadData()
         {
-            CustomerBasket basket = await DataStore.GetCustomerBasket();
-
-            //Items
-            foreach (var shoppingCart in basket.Items)
+            try
             {
-                ShoppingCartCollection.Add(shoppingCart);
+                IsBusy = true;
+                await Task.Delay(100);
+                CustomerBasket basket = await DataStore.GetCustomerBasket();
+
+                //Items
+                foreach (var shoppingCart in basket.Items)
+                {
+                    ShoppingCartCollection.Add(shoppingCart);
+                }
+
+                //Total Price
+                TotalPrice = basket.Items.Sum(d => d.price).ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
 
-            //Total Price
-            TotalPrice = basket.Items.Sum(d => d.price).ToString();
-
         }
-        private async void ClearCart(object obj)
+        private void ClearCart(object obj)
         {
-            bool response = await DataStore.ClearShoppingCart();
-            if (response)
+            Task.Run(async () =>
             {
-                await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
-                ShoppingCartCollection.Clear();
-                TotalPrice = "0";
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("", "Something went wrong", "Cancel");
-            }
+                try
+                {
+                    IsBusy = true;
+                    await Task.Delay(100);
+                    bool response = await DataStore.ClearShoppingCart();
+                    if (response)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
+                        ShoppingCartCollection.Clear();
+                        TotalPrice = "0";
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Something went wrong", "Cancel");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+
+            });
         }
-     
+
 
         #endregion
     }

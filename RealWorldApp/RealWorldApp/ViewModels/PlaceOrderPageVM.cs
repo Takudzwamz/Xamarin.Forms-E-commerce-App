@@ -1,6 +1,8 @@
 ﻿using RealWorldApp.Helpers;
 using RealWorldApp.Models;
 using RealWorldApp.Pages;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -44,24 +46,47 @@ namespace RealWorldApp.ViewModels
         #endregion
 
         #region methods
-        private async void PlaceOrderNow(object obj)
+        private void PlaceOrderNow(object obj)
         {
-            var order = new OrderDto()
+            Task.Run(async () =>
             {
-                ShipToAddress = CurrentAddress,
-                BasketId = Preferences.Get(Constants.BasketID, string.Empty),
-                DeliveryMethodId = (await DataStore.GetCustomerBasket()).DeliveryMethodId.Value
-            };
-            Order response = await DataStore.PlaceOrder(order);
-            if (response != null)
-            {
-                await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
-                Application.Current.MainPage = new NavigationPage(new HomePage());
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
-            }
+
+                try
+                {
+
+                    var order = new OrderDto()
+                    {
+                        ShipToAddress = CurrentAddress,
+                        BasketId = Preferences.Get(Constants.BasketID, string.Empty),
+                        //DeliveryMethodId = (await DataStore.GetCustomerBasket()).DeliveryMethodId.Value
+                    };
+
+                    IsBusy = true;
+                    await Task.Delay(100);
+                    //prepare payment
+                    PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
+                    var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
+                    //debug here
+                    Order response = await DataStore.PlaceOrder(order);
+                    if (response != null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            });
         }
 
         #endregion

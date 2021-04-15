@@ -49,7 +49,7 @@ namespace RealWorldApp.ViewModels
             try
             {
                 IsBusy = true;
-
+                await Task.Delay(100);
                 bool IsSucces = await DataStore.Login(LoginData);
 
                 Preferences.Set("email", LoginData.Email);

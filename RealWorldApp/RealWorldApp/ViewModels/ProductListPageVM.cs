@@ -53,15 +53,28 @@ namespace RealWorldApp.ViewModels
         #region methods
         private async void GetProducts(int typeId)
         {
-            var parameters = new ProductSpecParams
+            try
             {
-                TypeId = typeId,
-                PageIndex = PageIndex,
-            };
-            List<ProductByCategory> products = await DataStore.GetProducts(parameters);
-            foreach (var product in products)
+                var parameters = new ProductSpecParams
+                {
+                    TypeId = typeId,
+                    PageIndex = PageIndex,
+                };
+                IsBusy = true;
+                await Task.Delay(100);
+                List<ProductByCategory> products = await DataStore.GetProducts(parameters);
+                foreach (var product in products)
+                {
+                    ProductByCategoryCollection.Add(product);
+                }
+            }
+            catch (Exception ex)
             {
-                ProductByCategoryCollection.Add(product);
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 

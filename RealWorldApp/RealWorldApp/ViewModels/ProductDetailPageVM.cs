@@ -1,4 +1,5 @@
 ﻿using RealWorldApp.Models;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -50,37 +51,65 @@ namespace RealWorldApp.ViewModels
 
 
         #region methods
-        private async void AddToCartNow(object obj)
+        private void AddToCartNow(object obj)
         {
             Task.Run(async () =>
             {
 
-                CartItem cart = new CartItem()
+                try
                 {
-                    Brand = CurrentProduct.ProductBrand,
-                    PictureUrl = CurrentProduct.PictureUrl,
-                    price = CurrentProduct.Price,
-                    ProductName = CurrentProduct.Name,
-                    Quantity = int.Parse(CurrentProduct.Quantity.ToString()),
-                    totalAmount = CurrentProduct.TotalPrice,
-                    Type = CurrentProduct.ProductType,
-                    Id = CurrentProduct.Id
-                };
+                    CartItem cart = new CartItem()
+                    {
+                        Brand = CurrentProduct.ProductBrand,
+                        PictureUrl = CurrentProduct.PictureUrl,
+                        price = CurrentProduct.Price,
+                        ProductName = CurrentProduct.Name,
+                        Quantity = int.Parse(CurrentProduct.Quantity.ToString()),
+                        totalAmount = CurrentProduct.TotalPrice,
+                        Type = CurrentProduct.ProductType,
+                        Id = CurrentProduct.Id
+                    };
+                    IsBusy = true;
+                    await Task.Delay(100);
 
-                bool response = await DataStore.AddItemsToCart(cart);
-                if (response)
-                {
-                    await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                    bool response = await DataStore.AddItemsToCart(cart);
+                    if (response)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+
+                }
+                finally
+                {
+                    IsBusy = false;
                 }
             });
         }
         private async void GetProductDetails(int productId)
         {
-            CurrentProduct = await DataStore.GetProductById(productId);
+
+            try
+            {
+                IsBusy = true;
+                await Task.Delay(100);
+                CurrentProduct = await DataStore.GetProductById(productId);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         #endregion
     }

@@ -24,5 +24,6 @@ namespace RealWorldApp.Services
         Task<List<OrderByUser>> GetOrdersByUser();
         Task<Order> GetOrderById(int orderId);
         Task<Order> PlaceOrder(OrderDto order);
+        Task<PaymentModel> ProcessPayFastPayment(OrderDto order);
     }
 }

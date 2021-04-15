@@ -40,10 +40,23 @@ namespace RealWorldApp.ViewModels
         #region methods
         private async Task GetOrderItems()
         {
-            List<OrderByUser> orders = await DataStore.GetOrdersByUser();
-            foreach (var order in orders)
+            try
             {
-                OrdersCollection.Add(order);
+                IsBusy = true;
+                await Task.Delay(100);
+                List<OrderByUser> orders = await DataStore.GetOrdersByUser();
+                foreach (var order in orders)
+                {
+                    OrdersCollection.Add(order);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
         #endregion

@@ -1,11 +1,8 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Runtime;
 
 namespace RealWorldApp.Droid
 {
@@ -29,5 +26,20 @@ namespace RealWorldApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        const string CALLBACK_SCHEME = "myapp";
+
+        [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
+        [IntentFilter(new[] { Android.Content.Intent.ActionView },
+            Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable },
+            DataScheme = CALLBACK_SCHEME)]
+        public class WebAuthenticationCallbackActivity : Xamarin.Essentials.WebAuthenticatorCallbackActivity
+        {
+        }
+        protected override void OnResume()
+        {
+            base.OnResume();
+            Xamarin.Essentials.Platform.OnResume();
+        }
     }
+
 }

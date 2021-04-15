@@ -1,5 +1,6 @@
 ﻿using RealWorldApp.Helpers;
 using RealWorldApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -58,9 +59,16 @@ namespace RealWorldApp.ViewModels
             //Initialize values
             ProductsCollection = new ObservableCollection<PopularProduct>();
             CategoriesCollection = new ObservableCollection<Category>();
+            
+            Task.Run(() =>
+             {
+                 GetPopularProducts();
+             });
 
-            GetPopularProducts();
-            GetCategories();
+            Task.Run(() =>
+            {
+                GetCategories();
+            });
 
             UserName = Preferences.Get(Constants.UserName, string.Empty);
 
@@ -77,24 +85,63 @@ namespace RealWorldApp.ViewModels
 
         public async void LoadData()
         {
-            TotalCartItem response = await DataStore.GetTotalCartItems();
-            TotalItems = response.totalItems.ToString();
+            try
+            {
+                IsBusy = true;
+                await Task.Delay(100);
+                TotalCartItem response = await DataStore.GetTotalCartItems();
+                TotalItems = response.totalItems.ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         private async void GetCategories()
         {
-            List<Category> categories = await DataStore.GetCategories();
-            foreach (var category in categories)
+            try
             {
-                CategoriesCollection.Add(category);
+                IsBusy = true;
+                await Task.Delay(100);
+                List<Category> categories = await DataStore.GetCategories();
+                foreach (var category in categories)
+                {
+                    CategoriesCollection.Add(category);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
         private async void GetPopularProducts()
         {
-            List<PopularProduct> products = await DataStore.GetPopularProducts();
-            foreach (var product in products)
+            try
             {
-                ProductsCollection.Add(product);
+                IsBusy = true;
+                await Task.Delay(100);
+                List<PopularProduct> products = await DataStore.GetPopularProducts();
+                foreach (var product in products)
+                {
+                    ProductsCollection.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
         #endregion

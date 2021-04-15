@@ -207,5 +207,12 @@ namespace RealWorldApp.Services
             Order NewOrder = JsonConvert.DeserializeObject<Order>(result);
             return NewOrder;
         }
+
+        public async Task<PaymentModel> ProcessPayFastPayment(OrderDto order)
+        {
+            string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful);
+            PaymentModel NewOrder = JsonConvert.DeserializeObject<PaymentModel>(result);
+            return NewOrder;
+        }
     }
 }
