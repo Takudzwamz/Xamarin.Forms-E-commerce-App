@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace RealWorldApp.ViewModels
 {
@@ -45,10 +45,14 @@ namespace RealWorldApp.ViewModels
                 IsBusy = true;
                 await Task.Delay(100);
                 List<OrderByUser> orders = await DataStore.GetOrdersByUser();
-                foreach (var order in orders)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    OrdersCollection.Add(order);
-                }
+                    foreach (var order in orders)
+                    {
+                        OrdersCollection.Add(order);
+                    }
+
+                });
             }
             catch (Exception ex)
             {

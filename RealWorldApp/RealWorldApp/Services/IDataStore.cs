@@ -14,11 +14,11 @@ namespace RealWorldApp.Services
         Task<TotalCartItem> GetTotalCartItems();
         Task<CustomerBasket> GetCustomerBasket();
         Task<List<Category>> GetCategories();
-        Task<List<PopularProduct>> GetPopularProducts();
+        Task<List<ProductData>> GetPopularProducts();
         Task<List<CartItem>> GetShoppingCartItems();
         Task<CartSubTotal> GetCartSubTotal();
         Task<bool> ClearShoppingCart();
-        Task<List<ProductByCategory>> GetProducts(ProductSpecParams parameters);
+        Task<List<ProductData>> GetProducts(ProductSpecParams parameters);
         Task<Product> GetProductById(int productId);
         Task<bool> AddItemsToCart(CartItem cart);
         Task<List<OrderByUser>> GetOrdersByUser();

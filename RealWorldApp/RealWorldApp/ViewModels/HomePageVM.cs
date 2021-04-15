@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace RealWorldApp.ViewModels
 {
     public class HomePageVM : BaseViewModel
     {
         #region Properties
-        private ObservableCollection<PopularProduct> _productsCollection;
-        public ObservableCollection<PopularProduct> ProductsCollection
+        private ObservableCollection<ProductData> _productsCollection;
+        public ObservableCollection<ProductData> ProductsCollection
         {
             get => _productsCollection;
             set
@@ -57,9 +58,9 @@ namespace RealWorldApp.ViewModels
         public HomePageVM()
         {
             //Initialize values
-            ProductsCollection = new ObservableCollection<PopularProduct>();
+            ProductsCollection = new ObservableCollection<ProductData>();
             CategoriesCollection = new ObservableCollection<Category>();
-            
+
             Task.Run(() =>
              {
                  GetPopularProducts();
@@ -90,7 +91,10 @@ namespace RealWorldApp.ViewModels
                 IsBusy = true;
                 await Task.Delay(100);
                 TotalCartItem response = await DataStore.GetTotalCartItems();
-                TotalItems = response.totalItems.ToString();
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    TotalItems = response.totalItems.ToString();
+                });
             }
             catch (Exception ex)
             {
@@ -108,10 +112,14 @@ namespace RealWorldApp.ViewModels
                 IsBusy = true;
                 await Task.Delay(100);
                 List<Category> categories = await DataStore.GetCategories();
-                foreach (var category in categories)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    CategoriesCollection.Add(category);
-                }
+                    foreach (var category in categories)
+                    {
+                        CategoriesCollection.Add(category);
+                    }
+
+                });
             }
             catch (Exception ex)
             {
@@ -129,11 +137,15 @@ namespace RealWorldApp.ViewModels
             {
                 IsBusy = true;
                 await Task.Delay(100);
-                List<PopularProduct> products = await DataStore.GetPopularProducts();
-                foreach (var product in products)
+                List<ProductData> products = await DataStore.GetPopularProducts();
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    ProductsCollection.Add(product);
-                }
+                    foreach (var product in products)
+                    {
+                        ProductsCollection.Add(product);
+                    }
+
+                });
             }
             catch (Exception ex)
             {

@@ -2,16 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace RealWorldApp.ViewModels
 {
     public class ProductListPageVM : BaseViewModel
     {
         #region Properties
-        private ObservableCollection<ProductByCategory> _productByCategoryCollection;
-        public ObservableCollection<ProductByCategory> ProductByCategoryCollection
+        private ObservableCollection<ProductData> _productByCategoryCollection;
+        public ObservableCollection<ProductData> ProductByCategoryCollection
         {
             get => _productByCategoryCollection;
             set
@@ -39,7 +39,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public ProductListPageVM(int typeId, string categoryName)
         {
-            ProductByCategoryCollection = new ObservableCollection<ProductByCategory>();
+            ProductByCategoryCollection = new ObservableCollection<ProductData>();
             CategoryName = categoryName;
 
 
@@ -62,11 +62,15 @@ namespace RealWorldApp.ViewModels
                 };
                 IsBusy = true;
                 await Task.Delay(100);
-                List<ProductByCategory> products = await DataStore.GetProducts(parameters);
-                foreach (var product in products)
+                List<ProductData> products = await DataStore.GetProducts(parameters);
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    ProductByCategoryCollection.Add(product);
-                }
+                    foreach (var product in products)
+                    {
+                        ProductByCategoryCollection.Add(product);
+                    }
+
+                });
             }
             catch (Exception ex)
             {

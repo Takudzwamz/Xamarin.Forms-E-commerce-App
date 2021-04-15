@@ -57,14 +57,18 @@ namespace RealWorldApp.ViewModels
                 await Task.Delay(100);
                 CustomerBasket basket = await DataStore.GetCustomerBasket();
 
-                //Items
-                foreach (var shoppingCart in basket.Items)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    ShoppingCartCollection.Add(shoppingCart);
-                }
 
-                //Total Price
-                TotalPrice = basket.Items.Sum(d => d.price).ToString();
+                    //Items
+                    foreach (var shoppingCart in basket.Items)
+                    {
+                        ShoppingCartCollection.Add(shoppingCart);
+                    }
+
+                    //Total Price
+                    TotalPrice = basket.Items.Sum(d => d.price).ToString();
+                });
             }
             catch (Exception ex)
             {

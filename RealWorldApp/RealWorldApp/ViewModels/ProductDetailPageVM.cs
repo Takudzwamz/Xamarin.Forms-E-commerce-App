@@ -74,14 +74,18 @@ namespace RealWorldApp.ViewModels
                     await Task.Delay(100);
 
                     bool response = await DataStore.AddItemsToCart(cart);
-                    if (response)
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
-                    }
+
+                        if (response)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                        }
+                    });
                 }
                 catch (Exception ex)
                 {
@@ -100,8 +104,11 @@ namespace RealWorldApp.ViewModels
             {
                 IsBusy = true;
                 await Task.Delay(100);
-                CurrentProduct = await DataStore.GetProductById(productId);
-
+                var data = await DataStore.GetProductById(productId);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    CurrentProduct = data;
+                });
             }
             catch (Exception ex)
             {

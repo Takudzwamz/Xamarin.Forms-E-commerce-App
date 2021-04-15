@@ -1,9 +1,8 @@
 ﻿using RealWorldApp.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace RealWorldApp.ViewModels
 {
@@ -54,12 +53,16 @@ namespace RealWorldApp.ViewModels
                 IsBusy = true;
                 await Task.Delay(100);
                 Order order = await DataStore.GetOrderById(orderId);
-                foreach (var item in order.OrderItems)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    OrderDetailCollection.Add(item);
-                }
+                    foreach (var item in order.OrderItems)
+                    {
+                        OrderDetailCollection.Add(item);
+                    }
 
-                TotalPrice = " ZAR " + order.Total;
+                    TotalPrice = " ZAR " + order.Total;
+
+                });
             }
             catch (Exception ex)
             {

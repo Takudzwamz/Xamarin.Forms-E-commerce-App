@@ -136,10 +136,12 @@ namespace RealWorldApp.Services
             return basket;
         }
 
-        public Task<List<PopularProduct>> GetPopularProducts()
+        public async Task<List<ProductData>> GetPopularProducts()
         {
-            List<PopularProduct> products = new List<PopularProduct>();
-            return Task.FromResult(products);
+            ProductSpecParams parameters = new ProductSpecParams() {   };
+            var result = await MakeCall(Url: Constants.APIEndpoints.Products.Products_, parameters: parameters, method: Method.GET);
+            var data =  JsonConvert.DeserializeObject<ProductApiData>(result);
+            return data.data.ToList();
         }
 
         public async Task<List<CartItem>> GetShoppingCartItems()
@@ -160,10 +162,11 @@ namespace RealWorldApp.Services
             return result;
         }
 
-        public async Task<List<ProductByCategory>> GetProducts(ProductSpecParams parameters)
+        public async Task<List<ProductData>> GetProducts(ProductSpecParams parameters)
         {
             var result = await MakeCall(Url: Constants.APIEndpoints.Products.Products_, parameters: parameters, method: Method.GET);
-            return JsonConvert.DeserializeObject<List<ProductByCategory>>(result);
+            var data = JsonConvert.DeserializeObject<ProductApiData>(result);
+            return data.data.ToList();
         }
 
         public async Task<Product> GetProductById(int productId)

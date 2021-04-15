@@ -14,12 +14,15 @@
         <Grid>
             <CollectionView ItemsSource="{Binding ProductsCollection}"
                             SelectionMode="Single"
+                            Header="{Binding .}"
                             SelectionChanged="CvProducts_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
                                      Span="2" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.Header>
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        
                     <StackLayout>
                         <Label Margin="15,170,15,0"
                                Text="Our Menu"
@@ -66,9 +69,10 @@
                                TextColor="Black"
                                FontSize="Medium" />
                     </StackLayout>
-                </CollectionView.Header >
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate >
                 <CollectionView.ItemTemplate >
-                    <DataTemplate >
+                    <DataTemplate>
                         <StackLayout Spacing="5"
                                      Padding="10"
                                      Margin="15,0,15,0"
@@ -85,12 +89,8 @@
                                 <Image Aspect="Fill"
                                    HeightRequest="200"
                                    WidthRequest="200"
-                                   Source="{Binding FullImageUrl}"/>
-
-
+                                   Source="{Binding pictureUrl}"/>
                             </Frame>
-
-
 
                             <Label TextColor="#000000"
                                    HorizontalTextAlignment="Center"

@@ -15,4 +15,5 @@ namespace RealWorldApp.Models
 
         public string FullImageUrl => AppSettings.ApiUrl + imageUrl;
     }
+   
 }

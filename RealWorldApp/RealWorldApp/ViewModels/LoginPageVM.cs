@@ -1,4 +1,5 @@
-﻿using RealWorldApp.Models;
+﻿using RealWorldApp.Helpers;
+using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
 using System.Collections.Generic;
@@ -58,6 +59,7 @@ namespace RealWorldApp.ViewModels
                 {
                     Preferences.Set("email", LoginData.Email);
                     Preferences.Set("password", LoginData.Password);
+                    Preferences.Set(Constants.UserName, result.DisplayName);
                     Application.Current.MainPage = new NavigationPage(new HomePage());
                 }
                 else

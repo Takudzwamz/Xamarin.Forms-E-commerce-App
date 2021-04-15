@@ -29,7 +29,7 @@ namespace RealWorldApp.Helpers
 
             public class Products
             {
-                public const string Types = "types";
+                public const string Types = "Products/types";
                 public const string Products_ = "products";
             }
 
