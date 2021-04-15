@@ -1,8 +1,6 @@
 ﻿using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -19,6 +17,7 @@ namespace RealWorldApp.ViewModels
             set
             {
                 SetProperty(ref _register, value);
+                SignUpCommand?.ChangeCanExecute();
             }
         }
 
@@ -45,8 +44,10 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public SignupPageVM()
         {
-            RegisterData = new Register();
-            SignUpCommand = new Command(SignUp, CanSignUp);
+            string pp = "Pa$$w0rd";
+            RegisterData = new Register() { Password = pp, DisplayName = "Hey Hi", Email = "fzanyajibs@gmail.com" };
+            TempPassword = pp;
+            SignUpCommand = new Command(SignUp);
             LoginCommand = new Command(GotoLogin);
         }
         #endregion
@@ -61,9 +62,9 @@ namespace RealWorldApp.ViewModels
         {
             //if (TempPassword != RegisterData.Password)
             //    return false;
-            if (string.IsNullOrWhiteSpace(RegisterData.Email))
+            if (string.IsNullOrWhiteSpace(RegisterData?.Email))
                 return false;
-            if (string.IsNullOrWhiteSpace(RegisterData.DisplayName))
+            if (string.IsNullOrWhiteSpace(RegisterData?.DisplayName))
                 return false;
 
             return true;
@@ -83,22 +84,22 @@ namespace RealWorldApp.ViewModels
                 IsBusy = true;
                 await Task.Delay(100);
                 bool IsEmailExists = await DataStore.CheckEmailExist(RegisterData.Email.Trim()); //emailexists
-                if (!IsEmailExists)
+                if (IsEmailExists)
                 {
                     await Application.Current.MainPage.DisplayAlert("Email Exists", "Please enter another email or proceed to Login", "Cancel");
                     return;
                 }
 
-                bool IsRegSuccess = await DataStore.SignUp(RegisterData);
+                var result  = await DataStore.SignUp(RegisterData);
 
-                if (IsRegSuccess)
+                if (result.IsSuccess)
                 {
                     await Application.Current.MainPage.DisplayAlert("Hi", "Your account has been created", "Alright");
                     await Application.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                    await Application.Current.MainPage.DisplayAlert(result.message, result.errors?[0], "Cancel");
                 }
             }
             catch (Exception ex)

@@ -29,10 +29,10 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public LoginPageVM()
         {
-            LoginData = new Login();
+            string pp = "Pa$$w0rd";
+            LoginData = new Login() { Email = "fzanyajibs@gmail.com", Password = pp };
             LoginCommand = new Command(LoginNow, CanLogin);
         }
-
 
         #endregion
 
@@ -52,13 +52,12 @@ namespace RealWorldApp.ViewModels
             {
                 IsBusy = true;
                 await Task.Delay(100);
-                bool IsSucces = await DataStore.Login(LoginData);
+               var result  = await DataStore.Login(LoginData);
 
-                Preferences.Set("email", LoginData.Email);
-                Preferences.Set("password", LoginData.Password);
-
-                if (IsSucces)
+                if (result.IsSuccess)
                 {
+                    Preferences.Set("email", LoginData.Email);
+                    Preferences.Set("password", LoginData.Password);
                     Application.Current.MainPage = new NavigationPage(new HomePage());
                 }
                 else

@@ -19,7 +19,7 @@ namespace RealWorldApp.Services
         //public async Task<string> MakeCall(string Url, object payload = null, IDictionary<string, string> parameters = null, Method method = Method.POST)
         public async Task<string> MakeCall(string Url, object payload = null, object parameters = null, Method method = Method.POST)
         {
-            await TokenValidator.CheckTokenValidity();
+            //await TokenValidator.CheckTokenValidity();
             RestClient client = new RestClient(AppSettings.ApiUrl + Url)
             {
                 Authenticator = new RestSharp.Authenticators.JwtAuthenticator(Preferences.Get(Constants.AccessToken, string.Empty))
@@ -40,7 +40,7 @@ namespace RealWorldApp.Services
         }
         public async Task<bool> DeleteAPI(string Url)
         {
-            await TokenValidator.CheckTokenValidity();
+            //await TokenValidator.CheckTokenValidity();
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
             var response = await httpClient.DeleteAsync(AppSettings.ApiUrl + Url);
@@ -49,7 +49,7 @@ namespace RealWorldApp.Services
 
         public async Task<string> GetAPI(string Url)
         {
-            await TokenValidator.CheckTokenValidity();
+            //await TokenValidator.CheckTokenValidity();
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get(Constants.AccessToken, string.Empty));
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + Url);
@@ -58,7 +58,7 @@ namespace RealWorldApp.Services
 
         public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful)
         {
-            TokenValidator.CheckTokenValidity().ConfigureAwait(true);
+            //TokenValidator.CheckTokenValidity().ConfigureAwait(true);
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -73,19 +73,29 @@ namespace RealWorldApp.Services
         #endregion
         public async Task<bool> CheckEmailExist(string email)
         {
-            return true;
+            var result = await GetAPI($"{Constants.APIEndpoints.APIAccounts.emailexists}?email={email}");
+
+            return bool.Parse(result);
         }
 
-        public async Task<bool> SignUp(Register registerData)
+        public async Task<UserDto> SignUp(Register registerData)
         {
-            _ = PostAPI(Constants.APIEndpoints.APIAccounts.register, registerData, out bool IsSucessful);
-            return IsSucessful;
+            var result = await PostAPI(Constants.APIEndpoints.APIAccounts.register, registerData, out bool IsSucessful);
+            UserDto user = JsonConvert.DeserializeObject<UserDto>(result);
+            if (IsSucessful)
+                Preferences.Set(Constants.AccessToken, user.Token);
+            user.IsSuccess = IsSucessful;
+            return user;
         }
 
-        public async Task<bool> Login(Login loginData)
+        public async Task<UserDto> Login(Login loginData)
         {
-            _ = PostAPI(Constants.APIEndpoints.APIAccounts.login, loginData, out bool IsSucessful);
-            return IsSucessful;
+            var result = await PostAPI(Constants.APIEndpoints.APIAccounts.login, loginData, out bool IsSucessful);
+            UserDto user = JsonConvert.DeserializeObject<UserDto>(result);
+            if (IsSucessful)
+                Preferences.Set(Constants.AccessToken, user.Token);
+            user.IsSuccess = IsSucessful;
+            return user;
         }
 
         public async Task<TotalCartItem> GetTotalCartItems()

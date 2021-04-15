@@ -11,6 +11,7 @@ namespace RealWorldApp.Helpers
         public const string UserName = "userName";
         public const string TokenExpirationTime = "tokenExpirationTime";
         public const string BasketID = "basket_id";
+
         public class APIEndpoints
         {
             public class APIAccounts

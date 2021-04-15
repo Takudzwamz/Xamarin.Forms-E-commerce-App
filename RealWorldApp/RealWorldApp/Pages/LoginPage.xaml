@@ -78,6 +78,7 @@
                     TextColor="White"
                     CornerRadius="30"
                     Command="{Binding LoginCommand}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 

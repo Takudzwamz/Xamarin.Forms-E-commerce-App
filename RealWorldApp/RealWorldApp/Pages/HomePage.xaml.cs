@@ -79,7 +79,7 @@ namespace RealWorldApp.Pages
 
         private void TapLogout_Tapped(object sender, EventArgs e)
         {
-            Preferences.Set(Constants.AccessToken, string.Empty);
+            Preferences.Remove(Constants.AccessToken);
             Preferences.Set(Constants.TokenExpirationTime, 0);
             Application.Current.MainPage = new NavigationPage(new SignupPage());
         }

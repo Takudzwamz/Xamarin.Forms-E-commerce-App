@@ -9,8 +9,8 @@ namespace RealWorldApp.Services
     public interface IDataStore
     {
         Task<bool> CheckEmailExist(string email);
-        Task<bool> SignUp(Register registerData);
-        Task<bool> Login(Login loginData);
+        Task<UserDto> SignUp(Register registerData);
+        Task<UserDto> Login(Login loginData);
         Task<TotalCartItem> GetTotalCartItems();
         Task<CustomerBasket> GetCustomerBasket();
         Task<List<Category>> GetCategories();
