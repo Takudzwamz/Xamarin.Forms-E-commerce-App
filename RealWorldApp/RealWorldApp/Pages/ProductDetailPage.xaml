@@ -9,12 +9,12 @@
              x:Class="RealWorldApp.Pages.ProductDetailPage"
              BackgroundColor="FloralWhite">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <viewmodels:ProductDetailPageVM/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:DataType="models:Product">
+            <StackLayout>
                 <Grid>
                     <Image Source="{Binding CurrentProduct.FullImageUrl}"
                            Aspect="Fill"
