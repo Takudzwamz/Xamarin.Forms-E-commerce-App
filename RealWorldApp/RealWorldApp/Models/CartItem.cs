@@ -7,7 +7,6 @@ namespace RealWorldApp.Models
     public class CartItem
     {
         public double price { get; set; }
-        public double totalAmount { get; set; } //Not in new API
 
 
         public int Id { get; set; }
@@ -16,5 +15,7 @@ namespace RealWorldApp.Models
         public string PictureUrl { get; set; }
         public string Brand { get; set; }
         public string Type { get; set; }
+
+        public double totalAmount => Quantity * price;
     }
 }

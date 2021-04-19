@@ -18,8 +18,30 @@ namespace RealWorldApp.ViewModels
             }
         }
 
-        private Product _currentProduct;
-        public Product CurrentProduct
+        private double _quantity = 1;
+        public double Quantity
+        {
+            get => _quantity;
+            set
+            {
+                SetProperty(ref _quantity, value);
+                if (CurrentProduct != null)
+                    TotalPrice = value * CurrentProduct.price;
+            }
+        }
+
+        private double _totalPrice;
+        public double TotalPrice
+        {
+            get => _totalPrice;
+            set
+            {
+                SetProperty(ref _totalPrice, value);
+            }
+        }
+
+        private ProductData _currentProduct;
+        public ProductData CurrentProduct
         {
             get => _currentProduct;
             set
@@ -37,7 +59,7 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public ProductDetailPageVM(int productId)
         {
-            CurrentProduct = new Product();
+            CurrentProduct = new ProductData();
             ProductId = productId;
             AddCartCommand = new Command(AddToCartNow);
 
@@ -61,14 +83,13 @@ namespace RealWorldApp.ViewModels
                 {
                     CartItem cart = new CartItem()
                     {
-                        Brand = CurrentProduct.ProductBrand,
-                        PictureUrl = CurrentProduct.PictureUrl,
-                        price = CurrentProduct.Price,
-                        ProductName = CurrentProduct.Name,
-                        Quantity = int.Parse(CurrentProduct.Quantity.ToString()),
-                        totalAmount = CurrentProduct.TotalPrice,
-                        Type = CurrentProduct.ProductType,
-                        Id = CurrentProduct.Id
+                        Brand = CurrentProduct.productBrand,
+                        PictureUrl = CurrentProduct.pictureUrl,
+                        price = CurrentProduct.price,
+                        ProductName = CurrentProduct.name,
+                        Quantity = Convert.ToInt32(Quantity),
+                        Type = CurrentProduct.productType,
+                        Id = CurrentProduct.id
                     };
                     IsBusy = true;
                     await Task.Delay(100);

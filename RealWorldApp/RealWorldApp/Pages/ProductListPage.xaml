@@ -54,7 +54,7 @@
                                    BackgroundColor="White"
                                    HeightRequest="200"
                                    WidthRequest="200"
-                                   Source="{Binding FullImageUrl}"/>
+                                   Source="{Binding pictureUrl}"/>
                             </Frame>
                             
                             <Label TextColor="#000000"

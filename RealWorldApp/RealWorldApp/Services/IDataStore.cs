@@ -18,8 +18,8 @@ namespace RealWorldApp.Services
         Task<List<CartItem>> GetShoppingCartItems();
         Task<CartSubTotal> GetCartSubTotal();
         Task<bool> ClearShoppingCart();
-        Task<List<ProductData>> GetProducts(ProductSpecParams parameters);
-        Task<Product> GetProductById(int productId);
+        Task<List<ProductData>> GetProducts(object parameters);
+        Task<ProductData> GetProductById(int productId);
         Task<bool> AddItemsToCart(CartItem cart);
         Task<List<OrderByUser>> GetOrdersByUser();
         Task<Order> GetOrderById(int orderId);

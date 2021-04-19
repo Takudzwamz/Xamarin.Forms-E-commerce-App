@@ -31,7 +31,7 @@ namespace RealWorldApp.Pages
 
         private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ProductByCategory currectSelection = e.CurrentSelection.FirstOrDefault() as ProductByCategory;
+            ProductData currectSelection = e.CurrentSelection.FirstOrDefault() as ProductData;
             if (currectSelection == null) return;
             Navigation.PushModalAsync(new ProductDetailPage(currectSelection.id));
             ((CollectionView)sender).SelectedItem = null;

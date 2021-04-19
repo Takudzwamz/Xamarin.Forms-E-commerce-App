@@ -56,14 +56,14 @@ namespace RealWorldApp.Services
             return response;
         }
 
-        public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful)
+        public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful, bool UseTestAPI = false)
         {
             //TokenValidator.CheckTokenValidity().ConfigureAwait(true);
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
-            var response = httpClient.PostAsync(AppSettings.ApiUrl + Url, content).Result;
+            var response = httpClient.PostAsync(UseTestAPI ? AppSettings.ApiUrlTest : AppSettings.ApiUrl + Url, content).Result;
             IsSuccessful = response.IsSuccessStatusCode;
             var jsonResult = response.Content.ReadAsStringAsync().Result;
             return Task.FromResult(jsonResult);
@@ -121,7 +121,7 @@ namespace RealWorldApp.Services
         {
             CustomerBasket basket = new CustomerBasket()
             {
-                Id = System.Guid.NewGuid().ToString(),
+                Id =  System.Guid.NewGuid().ToString(), //Preferences.Get(Constants.UserEmail, string.Empty)  //
 
             };
             Preferences.Set(Constants.BasketID, basket.Id);
@@ -138,9 +138,9 @@ namespace RealWorldApp.Services
 
         public async Task<List<ProductData>> GetPopularProducts()
         {
-            ProductSpecParams parameters = new ProductSpecParams() {   };
+            ProductSpecParams parameters = new ProductSpecParams() { };
             var result = await MakeCall(Url: Constants.APIEndpoints.Products.Products_, parameters: parameters, method: Method.GET);
-            var data =  JsonConvert.DeserializeObject<ProductApiData>(result);
+            var data = JsonConvert.DeserializeObject<ProductApiData>(result);
             return data.data.ToList();
         }
 
@@ -162,17 +162,17 @@ namespace RealWorldApp.Services
             return result;
         }
 
-        public async Task<List<ProductData>> GetProducts(ProductSpecParams parameters)
+        public async Task<List<ProductData>> GetProducts(object parameters)
         {
             var result = await MakeCall(Url: Constants.APIEndpoints.Products.Products_, parameters: parameters, method: Method.GET);
             var data = JsonConvert.DeserializeObject<ProductApiData>(result);
             return data.data.ToList();
         }
 
-        public async Task<Product> GetProductById(int productId)
+        public async Task<ProductData> GetProductById(int productId)
         {
             var result = await GetAPI($"{Constants.APIEndpoints.Products.Products_}/{productId}");
-            Product product = JsonConvert.DeserializeObject<Product>(result);
+            ProductData product = JsonConvert.DeserializeObject<ProductData>(result);
             return product;
         }
 
@@ -223,7 +223,8 @@ namespace RealWorldApp.Services
 
         public async Task<PaymentModel> ProcessPayFastPayment(OrderDto order)
         {
-            string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful);
+            var result = await MakeCall(Url: Constants.APIEndpoints.Payments.PayFast, payload:order, method: Method.POST);
+            //string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful, true);
             PaymentModel NewOrder = JsonConvert.DeserializeObject<PaymentModel>(result);
             return NewOrder;
         }

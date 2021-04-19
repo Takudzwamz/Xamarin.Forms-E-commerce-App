@@ -57,8 +57,8 @@ namespace RealWorldApp.ViewModels
 
                 if (result.IsSuccess)
                 {
-                    Preferences.Set("email", LoginData.Email);
-                    Preferences.Set("password", LoginData.Password);
+                    Preferences.Set(Constants.UserEmail, LoginData.Email);
+                    Preferences.Set(Constants.UserPassword, LoginData.Password);
                     Preferences.Set(Constants.UserName, result.DisplayName);
                     Application.Current.MainPage = new NavigationPage(new HomePage());
                 }

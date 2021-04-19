@@ -16,7 +16,7 @@
         <ScrollView>
             <StackLayout>
                 <Grid>
-                    <Image Source="{Binding CurrentProduct.FullImageUrl}"
+                    <Image Source="{Binding CurrentProduct.pictureUrl}"
                            Aspect="Fill"
                            HeightRequest="300" />
                     <Image Source="close"
@@ -32,7 +32,7 @@
                 </Grid>
                 <StackLayout Margin="20">
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding CurrentProduct.Name}"
+                        <Label Text="{Binding CurrentProduct.name}"
                                TextColor="#80574D"
                                HorizontalOptions="Start"
                                FontSize="Large" />
@@ -42,7 +42,7 @@
                             <Label Text="ZAR"
                                    TextColor="#80574D"
                                    FontSize="Large" />
-                            <Label Text="{Binding CurrentProduct.Price}"
+                            <Label Text="{Binding CurrentProduct.price}"
                                    TextColor="#80574D"
                                    FontSize="Large" />
                             
@@ -52,13 +52,24 @@
                            TextColor="#B00905"
                            FontSize="Large"
                            Margin="0,10,0,0" />
-                    <Label Text="{Binding CurrentProduct.Description}"
+                    <Label Text="{Binding CurrentProduct.description}"
                            TextColor="#80574D"
                            FontSize="Body" />
                 </StackLayout>
 
-                <Stepper Margin="0,0,0,40" VerticalOptions="EndAndExpand"
-                             HorizontalOptions="CenterAndExpand" Value="{Binding CurrentProduct.Quantity, Mode=TwoWay}" Increment="1" Minimum="1" Maximum="1000"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                <Stepper Margin="0,0,0,40" VerticalOptions="CenterAndExpand" Grid.Column="0" Grid.Row="0"
+                             HorizontalOptions="CenterAndExpand" Value="{Binding Quantity, Mode=TwoWay}" Increment="1" Minimum="1" Maximum="1000"/>
+                    <Label Text="{Binding Quantity}" VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="0" FontSize="Large"/>
+                </Grid>
                 <StackLayout Orientation="Horizontal">
                     <StackLayout HorizontalOptions="FillAndExpand"
                                  Margin="30,0,0,10">
@@ -70,7 +81,7 @@
                             <Label Text="ZAR"
                                    TextColor="#80574D"
                                    FontSize="Medium" />
-                            <Label Text="{Binding CurrentProduct.TotalPrice, Mode=TwoWay}"
+                            <Label Text="{Binding TotalPrice, Mode=TwoWay}"
                                    TextColor="#80574D"
                                    FontSize="Medium" />
                             

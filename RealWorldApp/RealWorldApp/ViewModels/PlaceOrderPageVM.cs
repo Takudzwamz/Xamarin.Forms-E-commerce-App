@@ -1,4 +1,5 @@
-﻿using RealWorldApp.Helpers;
+﻿using Newtonsoft.Json;
+using RealWorldApp.Helpers;
 using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
@@ -39,7 +40,11 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public PlaceOrderPageVM(double totalPrice)
         {
-            CurrentAddress = new Address();
+            if (Preferences.ContainsKey(Constants.AddressStore))
+                CurrentAddress = JsonConvert.DeserializeObject<Address>(Preferences.Get(Constants.AddressStore, string.Empty));
+            else
+                CurrentAddress = new Address();
+
             TotalPrice = totalPrice;
             OrderCommand = new Command(PlaceOrderNow);
         }
@@ -49,11 +54,16 @@ namespace RealWorldApp.ViewModels
         #region methods
         private void PlaceOrderNow(object obj)
         {
+
+            //Check the Address for information
+
             Task.Run(async () =>
             {
 
                 try
                 {
+                    //Save Address to preference.
+                    Preferences.Set(Constants.AddressStore, JsonConvert.SerializeObject(CurrentAddress));
 
                     var order = new OrderDto()
                     {
@@ -66,7 +76,9 @@ namespace RealWorldApp.ViewModels
                     await Task.Delay(100);
                     //prepare payment
                     PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
-                    var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
+                    await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
+
+                  //  var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
                     //debug here
                     Order response = await DataStore.PlaceOrder(order);
                     if (response != null)

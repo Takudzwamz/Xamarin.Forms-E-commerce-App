@@ -22,6 +22,5 @@ namespace RealWorldApp.Models
         public double TotalPrice => Quantity * Price;
         public double Quantity { get; set; }
         public string FullImageUrl => AppSettings.ApiUrl + PictureUrl;
-
-    }
+    }   
 }

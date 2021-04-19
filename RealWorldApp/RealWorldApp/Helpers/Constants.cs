@@ -7,10 +7,19 @@ namespace RealWorldApp.Helpers
     public class Constants
     {
         public const string AccessToken = "accessToken";
-        public const string UserId = "userId";
+        public const string UserEmail = "useremail";
+        public const string UserPassword = "password";
         public const string UserName = "userName";
         public const string TokenExpirationTime = "tokenExpirationTime";
         public const string BasketID = "basket_id";
+        public const string AddressStore = "addressStore";
+
+
+
+        public class Messaging
+        {
+            public const string UpdateCartCount = "UpdateCartCount";
+        }
 
         public class APIEndpoints
         {

@@ -55,12 +55,12 @@
                             <StackLayout Margin="20,10,20,10">
                                 <Label TextColor="#B00905"
                                        FontSize="Medium"
-                                       Text="{Binding productName}"/>
+                                       Text="{Binding ProductName}"/>
                                 <StackLayout Orientation="Horizontal">
                                     <Label CharacterSpacing="1"
                                            TextColor="#80574D"
                                            FontSize="Medium"
-                                           Text="{Binding qty}"/>
+                                           Text="{Binding Quantity}"/>
                                     <Label Text="X"
                                            TextColor="#80574D"
                                            FontSize="Medium" />

@@ -55,10 +55,9 @@ namespace RealWorldApp.ViewModels
         {
             try
             {
-                var parameters = new ProductSpecParams
+                var parameters = new
                 {
-                    TypeId = typeId,
-                    PageIndex = PageIndex,
+                    TypeId = typeId
                 };
                 IsBusy = true;
                 await Task.Delay(100);
