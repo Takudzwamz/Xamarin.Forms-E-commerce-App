@@ -27,7 +27,9 @@ namespace RealWorldApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        const string CALLBACK_SCHEME = "myapp";
+
+        //below is partial code for Web Authenticator too. 
+        const string CALLBACK_SCHEME = "myapp"; //this must be relative to the app bundle. com.appcompany.name
 
         [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
         [IntentFilter(new[] { Android.Content.Intent.ActionView },
@@ -39,7 +41,7 @@ namespace RealWorldApp.Droid
         protected override void OnResume()
         {
             base.OnResume();
-            Xamarin.Essentials.Platform.OnResume();
+            Xamarin.Essentials.Platform.OnResume(); //this will allow the app to continue the flow of execution 
         }
     }
 
