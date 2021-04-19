@@ -1,4 +1,5 @@
-﻿using RealWorldApp.Models;
+﻿using RealWorldApp.Helpers;
+using RealWorldApp.Models;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -101,6 +102,7 @@ namespace RealWorldApp.ViewModels
                         if (response)
                         {
                             await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                            MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
                         }
                         else
                         {

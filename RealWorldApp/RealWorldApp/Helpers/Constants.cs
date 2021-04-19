@@ -45,6 +45,7 @@ namespace RealWorldApp.Helpers
             public class Orders
             {
                 public const string Orders_ = "orders";
+                public const string DeliveryMethod = "orders/deliveryMethods";
             }
             public class Payments
             {

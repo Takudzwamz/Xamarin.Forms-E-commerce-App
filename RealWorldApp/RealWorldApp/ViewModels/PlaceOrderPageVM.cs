@@ -3,9 +3,12 @@ using RealWorldApp.Helpers;
 using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Linq;
+using System.Reflection;
 
 namespace RealWorldApp.ViewModels
 {
@@ -31,6 +34,28 @@ namespace RealWorldApp.ViewModels
                 SetProperty(ref _address, value);
             }
         }
+
+        private int _deliveryMethod;
+        public int DeliveryMethod
+        {
+            get => _deliveryMethod;
+            set
+            {
+              
+                SetProperty(ref _deliveryMethod, value);
+            }
+        }
+
+       
+        private ObservableCollection<DeliveryMethod> _deliveryMethods;
+        public ObservableCollection<DeliveryMethod> DeliveryMethods
+        {
+            get => _deliveryMethods;
+            set
+            {
+                SetProperty(ref _deliveryMethods, value);
+            }
+        }
         #endregion
 
         #region Commands
@@ -47,15 +72,42 @@ namespace RealWorldApp.ViewModels
 
             TotalPrice = totalPrice;
             OrderCommand = new Command(PlaceOrderNow);
+
+            Task.Run(() =>
+            {
+                GetDeliveryMethods();
+            });
         }
 
         #endregion
 
         #region methods
-        private void PlaceOrderNow(object obj)
+
+        private async Task GetDeliveryMethods()
+        {
+            var data = await DataStore.GetDeliveryMethods();
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                DeliveryMethods = new ObservableCollection<DeliveryMethod>(data);
+                DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
+            });
+        }
+        private async void PlaceOrderNow(object obj)
         {
 
             //Check the Address for information
+
+            if(DeliveryMethod == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Invalid Input", "Please choose a Delivery Method", "Alright");
+                return;
+            }
+
+            if (CurrentAddress.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(CurrentAddress, null)).Any(d=> d.Value == string.Empty))
+            {
+                await Application.Current.MainPage.DisplayAlert("Invalid Input", "Please fill address", "Alright");
+                return;
+            }
 
             Task.Run(async () =>
             {
@@ -69,7 +121,7 @@ namespace RealWorldApp.ViewModels
                     {
                         ShipToAddress = CurrentAddress,
                         BasketId = Preferences.Get(Constants.BasketID, string.Empty),
-                        //DeliveryMethodId = (await DataStore.GetCustomerBasket()).DeliveryMethodId.Value
+                        DeliveryMethodId = DeliveryMethod
                     };
 
                     IsBusy = true;
@@ -78,7 +130,7 @@ namespace RealWorldApp.ViewModels
                     PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
                     await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
 
-                  //  var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
+                    //  var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
                     //debug here
                     Order response = await DataStore.PlaceOrder(order);
                     if (response != null)

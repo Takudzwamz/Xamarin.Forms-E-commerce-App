@@ -121,7 +121,7 @@ namespace RealWorldApp.Services
         {
             CustomerBasket basket = new CustomerBasket()
             {
-                Id =  System.Guid.NewGuid().ToString(), //Preferences.Get(Constants.UserEmail, string.Empty)  //
+                Id = System.Guid.NewGuid().ToString(), //Preferences.Get(Constants.UserEmail, string.Empty)  //
 
             };
             Preferences.Set(Constants.BasketID, basket.Id);
@@ -223,10 +223,17 @@ namespace RealWorldApp.Services
 
         public async Task<PaymentModel> ProcessPayFastPayment(OrderDto order)
         {
-            var result = await MakeCall(Url: Constants.APIEndpoints.Payments.PayFast, payload:order, method: Method.POST);
+            var result = await MakeCall(Url: Constants.APIEndpoints.Payments.PayFast, payload: order, method: Method.POST);
             //string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful, true);
             PaymentModel NewOrder = JsonConvert.DeserializeObject<PaymentModel>(result);
             return NewOrder;
+        }
+
+        public async Task<List<DeliveryMethod>> GetDeliveryMethods()
+        {
+            var result = await GetAPI(Constants.APIEndpoints.Orders.DeliveryMethod);
+            var data = JsonConvert.DeserializeObject<List<DeliveryMethod>>(result);
+            return data;
         }
     }
 }

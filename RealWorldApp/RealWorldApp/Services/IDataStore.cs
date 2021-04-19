@@ -1,6 +1,7 @@
 ﻿using RealWorldApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,5 +26,6 @@ namespace RealWorldApp.Services
         Task<Order> GetOrderById(int orderId);
         Task<Order> PlaceOrder(OrderDto order);
         Task<PaymentModel> ProcessPayFastPayment(OrderDto order);
+        Task<List<DeliveryMethod>> GetDeliveryMethods();
     }
 }

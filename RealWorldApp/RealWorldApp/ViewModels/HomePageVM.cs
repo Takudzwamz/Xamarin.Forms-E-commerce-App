@@ -77,6 +77,11 @@ namespace RealWorldApp.ViewModels
             {
                 LoadData();
             });
+
+            MessagingCenter.Subscribe<object>(this, Constants.Messaging.UpdateCartCount, (sender) =>
+            {
+                LoadData();
+            });
         }
 
         #endregion

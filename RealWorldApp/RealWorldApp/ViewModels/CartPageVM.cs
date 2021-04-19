@@ -1,4 +1,5 @@
-﻿using RealWorldApp.Models;
+﻿using RealWorldApp.Helpers;
+using RealWorldApp.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace RealWorldApp.ViewModels
                     }
 
                     //Total Price
-                    TotalPrice = basket.Items.Sum(d => d.price).ToString();
+                    TotalPrice = basket.Items.Sum(d => d.price * d.Quantity).ToString();
                 });
             }
             catch (Exception ex)
@@ -94,6 +95,8 @@ namespace RealWorldApp.ViewModels
                         await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
                         ShoppingCartCollection.Clear();
                         TotalPrice = "0";
+                        MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+
                     }
                     else
                     {
