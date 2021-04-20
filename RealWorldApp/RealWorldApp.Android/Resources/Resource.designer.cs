@@ -12149,16 +12149,19 @@ namespace RealWorldApp.Droid
 			public const int shopping_cart = 2131165383;
 			
 			// aapt resource value: 0x7F0700C8
-			public const int TasheLogo = 2131165384;
+			public const int Slice = 2131165384;
 			
 			// aapt resource value: 0x7F0700C9
-			public const int test_custom_background = 2131165385;
+			public const int TasheLogo = 2131165385;
 			
 			// aapt resource value: 0x7F0700CA
-			public const int tooltip_frame_dark = 2131165386;
+			public const int test_custom_background = 2131165386;
 			
 			// aapt resource value: 0x7F0700CB
-			public const int tooltip_frame_light = 2131165387;
+			public const int tooltip_frame_dark = 2131165387;
+			
+			// aapt resource value: 0x7F0700CC
+			public const int tooltip_frame_light = 2131165388;
 			
 			static Drawable()
 			{

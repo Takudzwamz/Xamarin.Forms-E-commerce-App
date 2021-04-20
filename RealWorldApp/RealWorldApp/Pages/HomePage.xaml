@@ -46,7 +46,7 @@
                                                 <Frame Padding="0"
                                                        CornerRadius="100"
                                                        IsClippedToBounds="True"
-                                                       BackgroundColor="#ff5e14"
+                                                       BackgroundColor="#FFAD87"
                                                        HeightRequest="50"
                                                        WidthRequest="50"
                                                        HorizontalOptions="Center">
@@ -147,7 +147,7 @@
                        Grid.Column="0"
                        Grid.RowSpan="4"
                        Grid.ColumnSpan="3"
-                       Source="banner.png"
+                       Source="Slice.png"
                        Aspect="Fill" />
                 <StackLayout Orientation="Horizontal"
                              Grid.Row="1"
@@ -247,7 +247,7 @@
                                HeightRequest="30"
                                WidthRequest="30" />
                         <Label Text="My Orders"
-                               TextColor="#80574D"
+                               TextColor="#ff5e14"
                                HeightRequest="50"
                                VerticalTextAlignment="Center"
                                FontSize="20" />
@@ -262,7 +262,7 @@
                                HeightRequest="30"
                                WidthRequest="30" />
                         <Label Text="Cart"
-                               TextColor="#80574D"
+                               TextColor="#ff5e14"
                                HeightRequest="50"
                                VerticalTextAlignment="Center"
                                FontSize="20" />
@@ -277,7 +277,7 @@
                                HeightRequest="30"
                                WidthRequest="30" />
                         <Label Text="Contact"
-                               TextColor="#80574D"
+                               TextColor="#ff5e14"
                                HeightRequest="50"
                                VerticalTextAlignment="Center"
                                FontSize="20" />
@@ -292,7 +292,7 @@
                                HeightRequest="30"
                                WidthRequest="30" />
                         <Label Text="Logout"
-                               TextColor="#80574D"
+                               TextColor="#ff5e14"
                                HeightRequest="50"
                                VerticalTextAlignment="Center"
                                FontSize="20" />
