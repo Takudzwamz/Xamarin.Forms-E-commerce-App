@@ -86,7 +86,8 @@ namespace RealWorldApp.ViewModels
         private async Task GetDeliveryMethods()
         {
             var data = await DataStore.GetDeliveryMethods();
-            Device.BeginInvokeOnMainThread(() =>
+
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 DeliveryMethods = new ObservableCollection<DeliveryMethod>(data);
                // DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
@@ -128,9 +129,11 @@ namespace RealWorldApp.ViewModels
                     await Task.Delay(100);
                     //prepare payment
                     PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
+
                     await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
 
-                    //  var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
+                    //Here is the partial code for WebAuthencator. 
+                    // var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
                     //debug here
                     Order response = await DataStore.PlaceOrder(order);
                     if (response != null)

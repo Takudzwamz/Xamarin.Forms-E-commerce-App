@@ -9,9 +9,15 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using System;
 
 namespace RealWorldApp.Services
 {
+    /// <summary>
+    /// Todo: 
+    /// Wrap all APi methods with try catch and return null on exception to the viewModel
+    /// can know and act. 
+    /// </summary>
     public class APIDataStore : IDataStore
     {
         #region API Calls
@@ -223,10 +229,17 @@ namespace RealWorldApp.Services
 
         public async Task<PaymentModel> ProcessPayFastPayment(OrderDto order)
         {
-            var result = await MakeCall(Url: Constants.APIEndpoints.Payments.PayFast, payload: order, method: Method.POST);
-            //string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful, true);
-            PaymentModel NewOrder = JsonConvert.DeserializeObject<PaymentModel>(result);
-            return NewOrder;
+            try
+            {
+                var result = await MakeCall(Url: Constants.APIEndpoints.Payments.PayFast, payload: order, method: Method.POST);
+                //string result = await PostAPI(Constants.APIEndpoints.Payments.PayFast, order, out bool IsSucessful, true);
+                PaymentModel NewOrder = JsonConvert.DeserializeObject<PaymentModel>(result);
+                return NewOrder;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<List<DeliveryMethod>> GetDeliveryMethods()
