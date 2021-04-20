@@ -123,9 +123,11 @@
                             </Frame>
                         </StackLayout>
                     </DataTemplate>
+                    
                 </CollectionView.ItemTemplate>
+                
             </CollectionView>
-
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             <Grid ColumnSpacing="0"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Start"

@@ -79,6 +79,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="EndAndExpand">
                 <StackLayout HorizontalOptions="FillAndExpand"
@@ -108,3 +109,4 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+    

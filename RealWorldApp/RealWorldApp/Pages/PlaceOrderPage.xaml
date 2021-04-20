@@ -184,7 +184,8 @@
                     BackgroundColor="#ff5e14"
                     TextColor="White"
                    Command="{Binding OrderCommand}"/>
-            </StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                </StackLayout>
 
         </ScrollView>
         </Grid>

@@ -94,8 +94,11 @@
                             BackgroundColor="#ff5e14"
                             TextColor="White" 
                             Command="{Binding AddCartCommand}"/>
+                    
                 </StackLayout>
+                <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
+    
 </ContentPage>
