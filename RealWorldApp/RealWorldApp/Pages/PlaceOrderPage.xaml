@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.PlaceOrderPage"
-             BackgroundColor="FloralWhite"
+             BackgroundColor="White"
              >
 
     <!--<ContentPage.BindingContext>
@@ -95,7 +95,7 @@
                             </Image.GestureRecognizers>
                         </Image>
                         <Label Grid.Column="1"
-                       TextColor="#CE0B06"
+                       TextColor="#ff5e14"
                        Text="PLACE ORDER"
                        FontSize="Large"
                        FontAttributes="Bold"
@@ -111,7 +111,7 @@
                            FontAttributes="Bold"
                            FontSize="Large"
                            HorizontalTextAlignment="Center"
-                           TextColor="#CE0B06" />
+                           TextColor="#ff5e14" />
                             <Entry Placeholder="First Name"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
@@ -181,7 +181,7 @@
                 </StackLayout>
 
                 <Button Text="Place My Order"
-                    BackgroundColor="#CE0B06"
+                    BackgroundColor="#ff5e14"
                     TextColor="White"
                    Command="{Binding OrderCommand}"/>
             </StackLayout>

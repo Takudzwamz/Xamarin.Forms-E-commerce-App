@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.HomePage"
-             BackgroundColor="FloralWhite"
+             BackgroundColor="White"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <viewmodels:HomePageVM/>
@@ -18,14 +18,14 @@
                             SelectionChanged="CvProducts_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
-                                     Span="2" />
+                                     Span="1" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         
                     <StackLayout>
                         <Label Margin="15,170,15,0"
-                               Text="Our Menu"
+                               Text="Product Categories"
                                TextColor="Black"
                                FontSize="Medium" />
                         <CollectionView ItemsSource="{Binding CategoriesCollection}"
@@ -40,23 +40,25 @@
                                     <StackLayout Orientation="Horizontal">
                                         <Frame Padding="0"
                                                BackgroundColor="Transparent"
-                                               Margin="15,0,15,0"
+                                               Margin="10,0,10,0"
                                                HasShadow="True">
                                             <StackLayout Orientation="Vertical">
                                                 <Frame Padding="0"
                                                        CornerRadius="100"
                                                        IsClippedToBounds="True"
-                                                       HeightRequest="90"
-                                                       WidthRequest="90"
+                                                       BackgroundColor="#ff5e14"
+                                                       HeightRequest="50"
+                                                       WidthRequest="50"
                                                        HorizontalOptions="Center">
                                                     <Image Aspect="AspectFill"
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="FillAndExpand"
                                                            Source="{Binding FullImageUrl}"/>
                                                 </Frame>
-                                                <Label TextColor="#B00905"
+                                                    <Label TextColor="#ff5e14"
                                                        HorizontalTextAlignment="Center"
                                                        FontSize="Medium"
+                                                       
                                                        Text="{Binding name}"/>
                                             </StackLayout>
                                         </Frame>
@@ -71,37 +73,59 @@
                     </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate >
-                <CollectionView.ItemTemplate >
+
+                <CollectionView.ItemTemplate  temsLayout="VerticalList">
                     <DataTemplate>
-                        <StackLayout Spacing="5"
-                                     Padding="10"
-                                     Margin="15,0,15,0"
-                                     Orientation="Vertical"
-                                     >
+                        <StackLayout 
+                        
+                        HorizontalOptions="Center" 
+                                     Padding="20,10,20,10"
+                                    >
+                            <Frame
+                       
+                       
+                        HorizontalOptions="FillAndExpand" 
+                        BackgroundColor="AntiqueWhite"
+                        Padding="0"
+                        CornerRadius="10"
+                        HasShadow="True"
+                        >
+                                <StackLayout 
+                                      Padding="0"
+                                      VerticalOptions="FillAndExpand"
+                                      HorizontalOptions="FillAndExpand" 
+                                  
+                                     
+                                         >
 
-                            <Frame Padding="0"
-                                   CornerRadius="30"
-                                   IsClippedToBounds="True"
+                                    <Frame Padding="0"
+                              
                                    HeightRequest="200"
-                                   WidthRequest="200"
-                                   HorizontalOptions="Center" 
-                                >
-                                <Image Aspect="Fill"
-                                   HeightRequest="200"
-                                   WidthRequest="200"
-                                   Source="{Binding pictureUrl}"/>
+                                   HorizontalOptions="FillAndExpand" 
+                                    >
+                                        <Image Aspect="Fill"
+                                       Source="{Binding pictureUrl}"/>
+                                        
+                                        
+                                        
+                                        
+                                    </Frame>
+
+                                    <Label TextColor="#000000"
+                                           FontSize="Body"
+                                       HorizontalTextAlignment="Center"
+                                       Text="{Binding name}"/>
+                                    <Label TextColor="#ff5e14"
+                                           FontSize="Large"
+                                       HorizontalTextAlignment="Center"
+                                       Text="{Binding price ,StringFormat='ZAR {0}'}"/>
+                                </StackLayout>
                             </Frame>
-
-                            <Label TextColor="#000000"
-                                   HorizontalTextAlignment="Center"
-                                   Text="{Binding name}"/>
-                            <Label TextColor="#B00905"
-                                   HorizontalTextAlignment="Center"
-                                   Text="{Binding price ,StringFormat='ZAR {0}'}"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
             <Grid ColumnSpacing="0"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Start"
@@ -160,7 +184,7 @@
                                Grid.Row="0"
                                Grid.Column="1"
                                Grid.RowSpan="2"
-                               BackgroundColor="#CE0B06">
+                               BackgroundColor="#ff5e14">
                             <Label Text="{Binding TotalItems}"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center"
@@ -176,7 +200,7 @@
                 <Image Margin="0,15,0,0"
                        HorizontalOptions="CenterAndExpand"
                        VerticalOptions="CenterAndExpand"
-                       Source="TasheLogo.png"
+                       Source="sg.png"
                        
                        Aspect="AspectFill"
                        Grid.Row="0"
@@ -190,15 +214,15 @@
                     <ColumnDefinition Width="0.6*" />
                     <ColumnDefinition Width="0.4*" />
                 </Grid.ColumnDefinitions>
-                <StackLayout BackgroundColor="AntiqueWhite"
+                <StackLayout BackgroundColor="White"
                              x:Name="SlMenu">
-                    <Grid BackgroundColor="#CE0B06"
+                    <Grid BackgroundColor="#ff5e14"
                           HeightRequest="120">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="6*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="TasheLogo.png"
+                        <Image Source="sg.png"
                                
                                Margin="5"
                                VerticalOptions="Center" />

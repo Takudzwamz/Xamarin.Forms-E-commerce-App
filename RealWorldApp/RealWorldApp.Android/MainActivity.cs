@@ -6,7 +6,7 @@ using Android.Runtime;
 
 namespace RealWorldApp.Droid
 {
-    [Activity(Label = "TJ Bakery", Icon = "@mipmap/TasheLogo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Swift Gas", Icon = "@mipmap/sg", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

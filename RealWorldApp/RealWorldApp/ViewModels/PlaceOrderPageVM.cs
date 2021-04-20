@@ -89,7 +89,7 @@ namespace RealWorldApp.ViewModels
             Device.BeginInvokeOnMainThread(() =>
             {
                 DeliveryMethods = new ObservableCollection<DeliveryMethod>(data);
-                DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
+               // DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
             });
         }
         private async void PlaceOrderNow(object obj)

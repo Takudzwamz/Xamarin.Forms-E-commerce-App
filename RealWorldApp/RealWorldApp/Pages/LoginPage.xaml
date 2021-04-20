@@ -5,8 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.LoginPage"
-             BackgroundImageSource="backg.jpg"
-             BackgroundColor="#9bb891"
+             
+             BackgroundColor="white"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <viewmodels:LoginPageVM/>
@@ -28,25 +28,23 @@
                         <TapGestureRecognizer x:Name="TapBackArrow" Tapped="TapBackArrow_Tapped" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Grid.Column="1"
-                       TextColor="#CE0B06"
-                       Text="TJ Bakery"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Center"
-                       HorizontalOptions="Center" />
+
             </Grid>
+            <Image Source="sg.png"
+                               
+                               Margin="5"
+                               VerticalOptions="Center" />
             <Frame HasShadow="True"
                    Padding="25"
-                   Margin="0,80,0,50"
+                   Margin="0,20,0,50"
+                   BackgroundColor="AntiqueWhite"
                    CornerRadius="30">
                 <StackLayout Margin="0,60,0,60">
                     <Label Text="Sign In"
                            FontAttributes="Bold"
                            FontSize="Title"
                            HorizontalTextAlignment="Center"
-                           TextColor="#CE0B06" />
+                           TextColor="#ff5e14" />
                     <Frame HasShadow="True"
                            Padding="5"
                            Margin="0,10,0,10"
@@ -74,7 +72,7 @@
                 </StackLayout>
             </Frame>
             <Button Text="Login"
-                    BackgroundColor="#CE0B06"
+                    BackgroundColor="#ff5e14"
                     TextColor="White"
                     CornerRadius="30"
                     Command="{Binding LoginCommand}"/>

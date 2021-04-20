@@ -56,14 +56,14 @@ namespace RealWorldApp.Services
             return response;
         }
 
-        public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful, bool UseTestAPI = false)
+        public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful)
         {
             //TokenValidator.CheckTokenValidity().ConfigureAwait(true);
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(data);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
-            var response = httpClient.PostAsync(UseTestAPI ? AppSettings.ApiUrlTest : AppSettings.ApiUrl + Url, content).Result;
+            var response = httpClient.PostAsync(AppSettings.ApiUrl + Url, content).Result;
             IsSuccessful = response.IsSuccessStatusCode;
             var jsonResult = response.Content.ReadAsStringAsync().Result;
             return Task.FromResult(jsonResult);
