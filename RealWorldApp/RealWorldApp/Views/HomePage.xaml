@@ -119,6 +119,7 @@
                                            FontSize="Large"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>
+                                    
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
