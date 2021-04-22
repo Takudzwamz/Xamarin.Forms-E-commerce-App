@@ -49,7 +49,7 @@
                                     </Grid.ColumnDefinitions>
                                     <StackLayout Grid.Column="0">
                                         <Label Text="Qty"
-                                               TextColor="#CE0B06"
+                                               TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
@@ -57,7 +57,7 @@
                                     </StackLayout>
                                     <StackLayout Grid.Column="1">
                                         <Label Text="Unit Price"
-                                               TextColor="#CE0B06"
+                                               TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
@@ -65,7 +65,7 @@
                                     </StackLayout>
                                     <StackLayout Grid.Column="2">
                                         <Label Text="Sub Total"
-                                               TextColor="#CE0B06"
+                                               TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
                                         <Label TextColor="#80574D"
                                                HorizontalOptions="Center"
@@ -81,7 +81,7 @@
                         <Label HorizontalOptions="End"
                                Text="Total Price"
                                FontSize="Medium"
-                               TextColor="#CE0B06" />
+                               TextColor="#ff5e14" />
                         <Label HorizontalOptions="End"
                                Text="{Binding TotalPrice}"
                                FontSize="Medium"

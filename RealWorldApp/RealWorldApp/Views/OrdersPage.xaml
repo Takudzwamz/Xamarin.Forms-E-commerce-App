@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.OrdersPage"
-             BackgroundColor="FloralWhite">
+             BackgroundColor="White">
     <ContentPage.BindingContext>
         <viewmodels:OrdersPageVM/>
     </ContentPage.BindingContext>
@@ -25,7 +25,7 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Grid.Column="1"
-                       TextColor="#CE0B06"
+                       TextColor="#ff5e14"
                        Text="Order History"
                        FontSize="Large"
                        FontAttributes="Bold"
@@ -42,7 +42,7 @@
                                     <StackLayout>
                                         <Label Text="Order No."
                                                TextColor="Gray" />
-                                        <Label TextColor="#CE0B06"
+                                        <Label TextColor="#ff5e14"
                                                Text="{Binding Id}"/>
                                     </StackLayout>
                                     <StackLayout HorizontalOptions="EndAndExpand">
@@ -64,6 +64,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

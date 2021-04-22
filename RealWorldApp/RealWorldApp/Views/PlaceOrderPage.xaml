@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.PlaceOrderPage"
-             BackgroundColor="FloralWhite"
+             BackgroundColor="White"
              >
 
     <!--<ContentPage.BindingContext>
@@ -78,82 +78,84 @@
             
         <ScrollView>
             <StackLayout>
-                <StackLayout Spacing="20"
+                    <StackLayout Spacing="20"
                      Margin="25">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="8*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Image Source="backarrow.png"
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="8*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="backarrow.png"
                        HeightRequest="25"
                        HorizontalOptions="Center"
                        VerticalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                        <Label Grid.Column="1"
-                       TextColor="#CE0B06"
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Grid.Column="1"
+                       TextColor="#ff5e14"
                        Text="PLACE ORDER"
                        FontSize="Large"
                        FontAttributes="Bold"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="Center" />
-                    </Grid>
-                    <Frame HasShadow="True"
-                   Padding="25"
-                   Margin="0,30,0,30">
-                        <StackLayout Margin="0,60,0,60">
-                            <Label Text="Provide Your Details"
+                        </Grid>
+                        <Frame HasShadow="True"
+                           Padding="25"
+                           Margin="0,30,0,30"
+                           BorderColor="AntiqueWhite"
+                           CornerRadius="10">
+                            <StackLayout Margin="0,60,0,60">
+                                <Label Text="Provide Your Details"
                            FontAttributes="Bold"
                            FontSize="Large"
                            HorizontalTextAlignment="Center"
-                           TextColor="#CE0B06" />
-                            <Entry Placeholder="First Name"
+                           TextColor="#ff5e14" />
+                                <Entry Placeholder="First Name"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.FirstName, Mode=TwoWay}"
                            Keyboard="Text" />
-                            <Entry Placeholder="Last Name"
+                                <Entry Placeholder="Last Name"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.LastName, Mode=TwoWay}"
                            Keyboard="Text" />
-                            <Entry Placeholder="Phone"
+                                <Entry Placeholder="Phone"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.PhoneNumber, Mode=TwoWay}"
                            Keyboard="Numeric" />
-                            <Entry Placeholder="Street"
+                                <Entry Placeholder="Street"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.Street, Mode=TwoWay}"
                            Keyboard="Text" />
-                            <Entry Placeholder="City"
+                                <Entry Placeholder="City"
                             HeightRequest="100"
                             PlaceholderColor="#80574D"
                             TextColor="#80574D"
                            Text="{Binding CurrentAddress.City, Mode=TwoWay}"
                             Keyboard="Text" />
-                            <Entry Placeholder="State"
+                                <Entry Placeholder="State"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.State, Mode=TwoWay}"
                            Keyboard="Text" />
-                            <Entry Placeholder="ZipCode"
+                                <Entry Placeholder="ZipCode"
                            PlaceholderColor="#80574D"
                            TextColor="#80574D"
                            Text="{Binding CurrentAddress.Zipcode, Mode=TwoWay}"
                            Keyboard="Numeric" />
-                        </StackLayout>
-                    </Frame>
-                   
-                </StackLayout>
+                            </StackLayout>
+                        </Frame>
 
-                <Label Text="Choose Delivery Method" FontSize="Large" Margin="25,0,0,0"/>
+                    </StackLayout>
+                
+                    <Label Text="Choose Delivery Method" FontSize="Large" Margin="25,0,0,0"/>
                     <StackLayout BindableLayout.ItemsSource="{Binding DeliveryMethods}" Orientation="Vertical" Margin="25" RadioButtonGroup.SelectedValue="{Binding DeliveryMethod}" RadioButtonGroup.GroupName="delivery">
                     <BindableLayout.EmptyView>
                         <Label Text="No Delivery Method"/>
@@ -181,10 +183,11 @@
                 </StackLayout>
 
                 <Button Text="Place My Order"
-                    BackgroundColor="#CE0B06"
+                    BackgroundColor="#ff5e14"
                     TextColor="White"
                    Command="{Binding OrderCommand}"/>
-            </StackLayout>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+                </StackLayout>
 
         </ScrollView>
         </Grid>

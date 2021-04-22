@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.CartPage"
-             BackgroundColor="FloralWhite">
+             BackgroundColor="White">
 
     <ContentPage.BindingContext>
         <viewmodels:CartPageVM/>
@@ -26,13 +26,13 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Grid.Column="1"
-                       TextColor="#CE0B06"
+                       TextColor="#ff5e14"
                        Text="Your Cart"
                        FontSize="Large"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center" />
                 <Label Grid.Column="2"
-                       TextColor="#CE0B06"
+                       TextColor="#ff5e14"
                        Text="Clear"
                        FontSize="15"
                        CharacterSpacing="1"
@@ -53,7 +53,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Margin="20,10,20,10">
-                                <Label TextColor="#B00905"
+                                <Label TextColor="#ff5e14"
                                        FontSize="Medium"
                                        Text="{Binding ProductName}"/>
                                 <StackLayout Orientation="Horizontal">
@@ -79,12 +79,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="EndAndExpand">
                 <StackLayout HorizontalOptions="FillAndExpand"
                              Margin="30,0,0,10">
                     <Label Text="Total Price"
-                           TextColor="#B00905"
+                           TextColor="#ff5e14"
                            FontSize="Medium" />
                     <StackLayout Orientation="Horizontal">
                         
@@ -98,7 +99,7 @@
                     </StackLayout>
                 </StackLayout>
                 <Button HorizontalOptions="FillAndExpand"
-                        BackgroundColor="#CE0B06"
+                        BackgroundColor="#ff5e14"
                         CornerRadius="30"
                         TextColor="White"
                         Text="Proceed"
@@ -108,3 +109,4 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
+    

@@ -30,9 +30,9 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public LoginPageVM()
         {
-            string pp = "Pa$$w0rd";
-            LoginData = new Login() { Email = "fzanyajibs@gmail.com", Password = pp };
-            LoginCommand = new Command(LoginNow, CanLogin);
+
+            LoginData = new Login();
+            LoginCommand = new Command(LoginNow);
         }
 
         #endregion

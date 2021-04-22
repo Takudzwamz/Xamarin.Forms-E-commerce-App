@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RealWorldApp.Pages.ContactPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="backarrow.png"
+                       Grid.Column="0"
+                       HorizontalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Grid.Column="1"
+                       TextColor="#ff5e14"
+                       Text="Contact Us"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" />
+            </Grid>
+            <Frame
+                HasShadow="True"
+                           Padding="5"
+                           Margin="0,10,0,10"
+                           CornerRadius="30">
+                <Label Margin="20"
+                   Text="For further support you can call our helpline,visit us or email us using the options below"
+                   FontSize="Body" /></Frame>
+
+            <Frame
+                HasShadow="True"
+                           Padding="5"
+                           Margin="0,10,0,10"
+                           CornerRadius="30">
+                <Label Margin="20"
+                   Text="Our Address: 72, 10th Road Kew, Johannesburg."
+                   FontSize="Body" />
+            </Frame>
+
+            <Frame
+                HasShadow="True"
+                           Padding="5"
+                           Margin="0,10,0,10"
+                           CornerRadius="30">
+                
+                <Label Margin="20"
+                   Text="Our Email address: info@swiftgas.co.za."
+                   FontSize="Body" />
+            </Frame>
+
+            
+            <Frame HasShadow="True"
+                           Padding="5"
+                           Margin="0,10,0,10"
+                           CornerRadius="30">
+                    <Entry Text="" Placeholder="Type info@swiftgas.co.za here!!!" x:Name="EntryEmail"/>
+            </Frame>
+            
+            <Frame HasShadow="True"
+                           Padding="5"
+                           Margin="0,10,0,10"
+                           CornerRadius="30">
+                  <Entry  Text="" Placeholder="Subject" x:Name="EntrySubject"/>
+            </Frame>
+            <Button Text="Submit"
+                    Margin="10"
+                    BackgroundColor="#ff5e14"
+                    TextColor="White"
+                    FontSize="Medium"
+                    CornerRadius="25" 
+                    Clicked="Button_Clicked"/>
+            <Button x:Name="BtnCall"
+                    Margin="10"
+                    Text="Call Us 066#######"
+                    BackgroundColor="#ff5e14"
+                    TextColor="White"
+                    FontSize="Medium"
+                    CornerRadius="25" 
+                    Clicked="BtnCall_Clicked"/>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

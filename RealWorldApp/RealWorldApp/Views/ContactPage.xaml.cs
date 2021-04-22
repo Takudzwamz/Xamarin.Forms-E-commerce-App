@@ -24,7 +24,13 @@ namespace RealWorldApp.Pages
 
         private void BtnCall_Clicked(object sender, EventArgs e)
         {
-            PhoneDialer.Open("36656656");
+            PhoneDialer.Open("066#######");
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            var message = new EmailMessage(EntrySubject.Text, "", EntryEmail.Text);
+            Email.ComposeAsync(message);
         }
     }
 }

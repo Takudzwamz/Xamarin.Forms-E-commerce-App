@@ -55,11 +55,19 @@ namespace RealWorldApp.Services
 
         public async Task<string> GetAPI(string Url)
         {
-            //await TokenValidator.CheckTokenValidity();
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get(Constants.AccessToken, string.Empty));
-            var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + Url);
-            return response;
+            try
+            {
+                //await TokenValidator.CheckTokenValidity();
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get(Constants.AccessToken, string.Empty));
+                var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + Url);
+                return response;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public static Task<string> PostAPI(string Url, object data, out bool IsSuccessful)
@@ -208,23 +216,45 @@ namespace RealWorldApp.Services
 
         public async Task<List<OrderByUser>> GetOrdersByUser()
         {
-            var result = await GetAPI(Constants.APIEndpoints.Orders.Orders_);
-            List<OrderByUser> orders = JsonConvert.DeserializeObject<List<OrderByUser>>(result);
-            return orders;
+            try
+            {
+                var result = await GetAPI(Constants.APIEndpoints.Orders.Orders_);
+                List<OrderByUser> orders = JsonConvert.DeserializeObject<List<OrderByUser>>(result);
+                return orders;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<Order> GetOrderById(int orderId)
         {
-            var result = await GetAPI($"{Constants.APIEndpoints.Orders.Orders_}/{orderId}");
-            Order order = JsonConvert.DeserializeObject<Order>(result);
-            return order;
+            try
+            {
+                var result = await GetAPI($"{Constants.APIEndpoints.Orders.Orders_}/{orderId}");
+                Order order = JsonConvert.DeserializeObject<Order>(result);
+                return order;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public async Task<Order> PlaceOrder(OrderDto order)
         {
-            string result = await PostAPI(Constants.APIEndpoints.Orders.Orders_, order, out bool IsSucessful);
-            Order NewOrder = JsonConvert.DeserializeObject<Order>(result);
-            return NewOrder;
+            try
+            {
+                string result = await PostAPI(Constants.APIEndpoints.Orders.Orders_, order, out bool IsSucessful);
+                Order NewOrder = JsonConvert.DeserializeObject<Order>(result);
+                return NewOrder;
+            }
+            catch(System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<PaymentModel> ProcessPayFastPayment(OrderDto order)
@@ -244,9 +274,16 @@ namespace RealWorldApp.Services
 
         public async Task<List<DeliveryMethod>> GetDeliveryMethods()
         {
-            var result = await GetAPI(Constants.APIEndpoints.Orders.DeliveryMethod);
-            var data = JsonConvert.DeserializeObject<List<DeliveryMethod>>(result);
-            return data;
+            try
+            {
+                var result = await GetAPI(Constants.APIEndpoints.Orders.DeliveryMethod);
+                var data = JsonConvert.DeserializeObject<List<DeliveryMethod>>(result);
+                return data;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
