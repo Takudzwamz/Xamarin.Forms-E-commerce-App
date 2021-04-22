@@ -90,18 +90,22 @@ namespace RealWorldApp.ViewModels
                     IsBusy = true;
                     await Task.Delay(100);
                     bool response = await DataStore.ClearShoppingCart();
-                    if (response)
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
-                        ShoppingCartCollection.Clear();
-                        TotalPrice = "0";
-                        MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+                        if (response)
+                        {
 
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("", "Something went wrong", "Cancel");
-                    }
+                            await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
+                            ShoppingCartCollection.Clear();
+                            TotalPrice = "0";
+                            MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("", "Something went wrong", "Cancel");
+                        }
+                    });
                 }
                 catch (Exception ex)
                 {

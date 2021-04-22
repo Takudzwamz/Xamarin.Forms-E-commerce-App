@@ -138,6 +138,7 @@ namespace RealWorldApp.ViewModels
                     Order response = await DataStore.PlaceOrder(order);
                     if (response != null)
                     {
+                        MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
                         await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
                         Application.Current.MainPage = new NavigationPage(new HomePage());
                     }
