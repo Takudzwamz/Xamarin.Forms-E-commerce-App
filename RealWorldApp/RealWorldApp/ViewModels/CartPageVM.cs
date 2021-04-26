@@ -1,5 +1,6 @@
 ﻿using RealWorldApp.Helpers;
 using RealWorldApp.Models;
+using RealWorldApp.Pages;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace RealWorldApp.ViewModels
     {
 
         #region Properties
+
+        private bool IsItemsLoaded { get; set; } = false;
+        private CustomerBasket customerBasket { get; set; }
         private ObservableCollection<CartItem> _shoppingCartCollection;
 
         public ObservableCollection<CartItem> ShoppingCartCollection
@@ -23,8 +27,8 @@ namespace RealWorldApp.ViewModels
             }
         }
 
-        private string _totalPrice;
-        public string TotalPrice
+        private double _totalPrice;
+        public double TotalPrice
         {
             get => _totalPrice;
             set { SetProperty(ref _totalPrice, value); }
@@ -33,6 +37,7 @@ namespace RealWorldApp.ViewModels
 
         #region Commands
         public Command ClearCartCommand { get; }
+        public Command ProceedCommand { get; }
         #endregion
 
         #region Constructor
@@ -40,35 +45,97 @@ namespace RealWorldApp.ViewModels
         {
             ShoppingCartCollection = new ObservableCollection<CartItem>();
             ClearCartCommand = new Command(ClearCart);
+            ProceedCommand = new Command(ProceedNow);
             Task.Run(() =>
             {
                 LoadData();
             });
         }
 
+
         #endregion
 
         #region methods
+        internal async void ClearItem(int itemId)
+        {
 
-        private async void LoadData()
+            CartItem current = ShoppingCartCollection.FirstOrDefault(d => d.Id == itemId);
+            customerBasket.Items.Remove(current);
+
+            UpdateBasketNow();
+           
+        }
+
+        private void UpdateBasketNow()
+        {
+            //update the API.
+            Task.Run(async () =>
+            {
+                try
+                {
+                    IsBusy = true;
+                    await Task.Delay(100);
+                    bool status = await DataStore.UpdateCartBasket(customerBasket);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+                LoadData(customerBasket);
+            });
+        }
+
+        internal void UpdateStepper(double value, int itemId)
+        {
+            if (!IsItemsLoaded)
+                return;
+
+            CartItem current = ShoppingCartCollection.FirstOrDefault(d => d.Id == itemId);
+            if(value != current.Quantity)
+            {
+                return;
+            }
+            //Update cart item to database. 
+            UpdateBasketNow();
+        }
+
+        private void ProceedNow(object obj)
+        {
+            Application.Current.MainPage.Navigation.PushModalAsync(new PlaceOrderPage(TotalPrice));
+        }
+
+        private async void LoadData(CustomerBasket _customerBasket = null)
         {
             try
             {
                 IsBusy = true;
                 await Task.Delay(100);
-                CustomerBasket basket = await DataStore.GetCustomerBasket();
+
+                if (_customerBasket == null)
+                    customerBasket = await DataStore.GetCustomerBasket();
+                else
+                    customerBasket = _customerBasket;
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-
+                    //clear the collection. 
+                    ShoppingCartCollection = new ObservableCollection<CartItem>();
                     //Items
-                    foreach (var shoppingCart in basket.Items)
+                    foreach (var shoppingCart in customerBasket.Items)
                     {
                         ShoppingCartCollection.Add(shoppingCart);
                     }
 
                     //Total Price
-                    TotalPrice = basket.Items.Sum(d => d.price * d.Quantity).ToString();
+                    TotalPrice = customerBasket.Items.Sum(d => d.price * d.Quantity);
+
+                    MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+                    IsItemsLoaded = true;
+
                 });
             }
             catch (Exception ex)
@@ -97,7 +164,7 @@ namespace RealWorldApp.ViewModels
 
                             await Application.Current.MainPage.DisplayAlert("", "Your cart has been cleared", "Alright");
                             ShoppingCartCollection.Clear();
-                            TotalPrice = "0";
+                            TotalPrice = 0;
                             MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
 
                         }

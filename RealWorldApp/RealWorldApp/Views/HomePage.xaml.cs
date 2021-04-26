@@ -1,5 +1,6 @@
 ﻿using RealWorldApp.Helpers;
 using RealWorldApp.Models;
+using RealWorldApp.ViewModels;
 using System;
 using System.Linq;
 using Xamarin.Essentials;
@@ -11,7 +12,7 @@ namespace RealWorldApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-
+        private HomePageVM viewModel => (HomePageVM)this.BindingContext;
         public HomePage()
         {
             InitializeComponent();
@@ -82,6 +83,19 @@ namespace RealWorldApp.Pages
             Preferences.Remove(Constants.AccessToken);
             Preferences.Set(Constants.TokenExpirationTime, 0);
             Application.Current.MainPage = new NavigationPage(new SignupPage());
+        }
+
+        private void AddToCart_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(((Button)sender).ClassId);
+                viewModel.AddToCart(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

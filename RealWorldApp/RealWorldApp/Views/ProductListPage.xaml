@@ -69,13 +69,24 @@
                                        Source="{Binding pictureUrl}"/>
                                     </Frame>
 
-                                    <Label TextColor="#000000"
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout HorizontalOptions="CenterAndExpand">
+                                            <Label TextColor="#000000"
+                                           FontSize="Body"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding name}"/>
-                                    <Label TextColor="#ff5e14"
+                                            <Label TextColor="#ff5e14"
                                            FontSize="Large"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>
+                                        </StackLayout>
+                                        <Button
+                            Text="Add To Cart" ClassId="{Binding id}"
+                            HorizontalOptions="EndAndExpand"
+                            CornerRadius="30"
+                            BackgroundColor="#ff5e14"
+                            TextColor="White" Clicked="AddToCart_Clicked"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>

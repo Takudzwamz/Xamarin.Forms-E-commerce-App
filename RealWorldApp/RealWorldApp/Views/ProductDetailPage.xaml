@@ -38,14 +38,14 @@
                                FontSize="Large" />
                         <StackLayout HorizontalOptions="EndAndExpand"
                                      Orientation="Horizontal">
-                            
+
                             <Label Text="ZAR"
                                    TextColor="#80574D"
                                    FontSize="Large" />
                             <Label Text="{Binding CurrentProduct.price}"
                                    TextColor="#80574D"
                                    FontSize="Large" />
-                            
+
                         </StackLayout>
                     </StackLayout>
                     <Label Text="Product Detail"
@@ -66,7 +66,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                <Stepper Margin="0,0,0,40" VerticalOptions="CenterAndExpand" Grid.Column="0" Grid.Row="0"
+                    <Stepper Margin="0,0,0,40" VerticalOptions="CenterAndExpand" Grid.Column="0" Grid.Row="0"
                              HorizontalOptions="CenterAndExpand" Value="{Binding Quantity, Mode=TwoWay}" Increment="1" Minimum="1" Maximum="1000"/>
                     <Label Text="{Binding Quantity}" VerticalOptions="StartAndExpand" Grid.Column="1" Grid.Row="0" FontSize="Large"/>
                 </Grid>
@@ -76,16 +76,12 @@
                         <Label Text="Total Price"
                                TextColor="#ff5e14"
                                FontSize="Medium" />
-                        <StackLayout Orientation="Horizontal">
-                            
-                            <Label Text="ZAR"
-                                   TextColor="#80574D"
-                                   FontSize="Medium" />
-                            <Label Text="{Binding TotalPrice, Mode=TwoWay}"
-                                   TextColor="#80574D"
-                                   FontSize="Medium" />
-                            
-                        </StackLayout>
+
+                        <Label CharacterSpacing="1"
+                                           TextColor="#80574D"
+                                           FontSize="Medium"
+                                           Text="{Binding TotalPrice,Mode=TwoWay,StringFormat='ZAR {0:F2}'}"/>
+
                     </StackLayout>
                     <Button x:Name="BtnAddToCart"
                             Text="Add To Cart"
@@ -94,11 +90,11 @@
                             BackgroundColor="#ff5e14"
                             TextColor="White" 
                             Command="{Binding AddCartCommand}"/>
-                    
+
                 </StackLayout>
                 <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-    
+
 </ContentPage>

@@ -2,8 +2,7 @@
 using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -32,6 +31,11 @@ namespace RealWorldApp.ViewModels
         {
 
             LoginData = new Login();
+            if (Debugger.IsAttached)
+            {
+                string pp = "Pa$$w0rd";
+                LoginData = new Login() { Email = "fzanyajibs@gmail.com", Password = pp };
+            }
             LoginCommand = new Command(LoginNow);
         }
 
@@ -53,7 +57,7 @@ namespace RealWorldApp.ViewModels
             {
                 IsBusy = true;
                 await Task.Delay(100);
-               var result  = await DataStore.Login(LoginData);
+                var result = await DataStore.Login(LoginData);
 
                 if (result.IsSuccess)
                 {

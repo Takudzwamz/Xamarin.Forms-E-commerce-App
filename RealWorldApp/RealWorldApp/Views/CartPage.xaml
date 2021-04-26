@@ -46,13 +46,22 @@
             </Grid>
             <ListView ItemsSource="{Binding ShoppingCartCollection}"
                       SelectionMode="None"
-                      CachingStrategy="RecycleElement"
                       HasUnevenRows="True"
                       SeparatorColor="#80574D">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Margin="20,10,20,10">
+                            <Grid Margin="20,10,20,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding PictureUrl}" Grid.Column="0" Grid.Row="0" HeightRequest="100" WidthRequest="100"/>
+                                <StackLayout Grid.Column="1" Grid.Row="0">
                                 <Label TextColor="#ff5e14"
                                        FontSize="Medium"
                                        Text="{Binding ProductName}"/>
@@ -75,6 +84,23 @@
                                            Text="{Binding totalAmount ,StringFormat='ZAR {0}'}"/>
                                 </StackLayout>
                             </StackLayout>
+                                <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                    <Stepper VerticalOptions="CenterAndExpand" ValueChanged="Stepper_ValueChanged" ClassId="{Binding Id}"
+                             HorizontalOptions="CenterAndExpand" Value="{Binding QuantityStep, Mode=TwoWay}" Increment="1" Minimum="1" Maximum="1000"/>
+                                    <Label Grid.Column="2" ClassId="{Binding Id}"
+                       TextColor="#ff5e14"
+                       Text="Remove"
+                       FontSize="15"
+                       CharacterSpacing="1"
+                       FontAttributes="Bold"
+                       VerticalTextAlignment="Center" HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ClearItem_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -87,24 +113,16 @@
                     <Label Text="Total Price"
                            TextColor="#ff5e14"
                            FontSize="Medium" />
-                    <StackLayout Orientation="Horizontal">
-                        
-                        <Label Text="ZAR"
-                               TextColor="#80574D"
-                               FontSize="Medium" />
-                        <Label x:Name="LblTotalPrice" Text="{Binding TotalPrice, Mode=TwoWay}"
-                               TextColor="#80574D"
-                               FontSize="Medium" />
-                        
-                    </StackLayout>
+                    <Label CharacterSpacing="1" x:Name="LblTotalPrice"
+                                           TextColor="#80574D"
+                                           FontSize="Medium"
+                                           Text="{Binding TotalPrice,Mode=TwoWay, StringFormat='ZAR {0:F2}'}"/>
                 </StackLayout>
                 <Button HorizontalOptions="FillAndExpand"
                         BackgroundColor="#ff5e14"
                         CornerRadius="30"
                         TextColor="White"
-                        Text="Proceed"
-                        x:Name="BtnProceed" 
-                        Clicked="BtnProceed_Clicked"/>
+                        Text="Proceed" Command="{Binding ProceedCommand}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

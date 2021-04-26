@@ -57,7 +57,7 @@
                                            TextColor="Black" />
                                     <Label  HorizontalOptions="EndAndExpand"
                                             TextColor="Black"
-                                            Text="{Binding Total,StringFormat='ZAR {0}'}"/>
+                                            Text="{Binding Total,StringFormat='ZAR {0:F2}'}"/>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

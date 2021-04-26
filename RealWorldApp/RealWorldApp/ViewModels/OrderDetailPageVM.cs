@@ -19,8 +19,8 @@ namespace RealWorldApp.ViewModels
             }
         }
 
-        private string _totalPrice;
-        public string TotalPrice
+        private double _totalPrice;
+        public double TotalPrice
         {
             get => _totalPrice;
             set
@@ -60,7 +60,7 @@ namespace RealWorldApp.ViewModels
                         OrderDetailCollection.Add(item);
                     }
 
-                    TotalPrice = " ZAR " + order.Total;
+                    TotalPrice = order.Total;
 
                 });
             }

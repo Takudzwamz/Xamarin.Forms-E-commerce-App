@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace RealWorldApp.ViewModels
 {
@@ -134,6 +135,59 @@ namespace RealWorldApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        internal void AddToCart(int id)
+        {
+            var CurrentProduct = ProductsCollection.FirstOrDefault(d=>d.id == id);
+
+            Task.Run(async () =>
+            {
+
+                try
+                {
+                    CartItem cart = new CartItem()
+                    {
+                        Brand = CurrentProduct.productBrand,
+                        PictureUrl = CurrentProduct.pictureUrl,
+                        price = CurrentProduct.price,
+                        ProductName = CurrentProduct.name,
+                        Quantity = 1,
+                        Type = CurrentProduct.productType,
+                        Id = CurrentProduct.id
+                    };
+                    IsBusy = true;
+                    await Task.Delay(100);
+
+                    bool response = await DataStore.AddItemsToCart(cart);
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+
+                        if (response)
+                        {
+                            MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+                            //await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                            bool answer = await Application.Current.MainPage.DisplayAlert("Cart Updated?", "Would you like to visit cart?", "Yes", "Continue Shopping");
+                            if (answer)
+                            {
+                                await Application.Current.MainPage.Navigation.PushModalAsync(new Pages.CartPage());
+                            }
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    IsBusy = false;
+                }
+            });
         }
 
         private async void GetPopularProducts()

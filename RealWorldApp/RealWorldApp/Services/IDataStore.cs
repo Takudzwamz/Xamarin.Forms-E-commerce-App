@@ -22,6 +22,8 @@ namespace RealWorldApp.Services
         Task<List<ProductData>> GetProducts(object parameters);
         Task<ProductData> GetProductById(int productId);
         Task<bool> AddItemsToCart(CartItem cart);
+        Task<bool> UpdateCartBasket(CustomerBasket basket);
+
         Task<List<OrderByUser>> GetOrdersByUser();
         Task<Order> GetOrderById(int orderId);
         Task<Order> PlaceOrder(OrderDto order);

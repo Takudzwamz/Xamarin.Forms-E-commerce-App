@@ -101,8 +101,13 @@ namespace RealWorldApp.ViewModels
 
                         if (response)
                         {
-                            await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
                             MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+                            // await Application.Current.MainPage.DisplayAlert("", "Your items has been added to the cart", "Alright");
+                            bool answer = await Application.Current.MainPage.DisplayAlert("Cart Updated?", "Would you like to visit cart?", "Yes", "Continue Shopping");
+                            if (answer)
+                            {
+                                await Application.Current.MainPage.Navigation.PushModalAsync(new Pages.CartPage());
+                            }
                         }
                         else
                         {
@@ -131,6 +136,7 @@ namespace RealWorldApp.ViewModels
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     CurrentProduct = data;
+                    Quantity = 1;
                 });
             }
             catch (Exception ex)

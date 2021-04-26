@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RealWorldApp.Models
+﻿namespace RealWorldApp.Models
 {
     public class CartItem
     {
@@ -17,5 +13,13 @@ namespace RealWorldApp.Models
         public string Type { get; set; }
 
         public double totalAmount => Quantity * price;
+        public double QuantityStep
+        {
+            get => Quantity;
+            set
+            {
+                Quantity = (int)value;
+            }
+        }
     }
 }

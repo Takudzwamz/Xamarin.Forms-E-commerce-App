@@ -36,5 +36,18 @@ namespace RealWorldApp.Pages
             Navigation.PushModalAsync(new ProductDetailPage(currectSelection.id));
             ((CollectionView)sender).SelectedItem = null;
         }
+
+        private void AddToCart_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = int.Parse(((Button)sender).ClassId);
+                viewModel.AddToCart(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 }

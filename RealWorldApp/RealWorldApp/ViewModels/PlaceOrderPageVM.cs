@@ -4,11 +4,11 @@ using RealWorldApp.Models;
 using RealWorldApp.Pages;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using System.Linq;
-using System.Reflection;
 
 namespace RealWorldApp.ViewModels
 {
@@ -41,12 +41,12 @@ namespace RealWorldApp.ViewModels
             get => _deliveryMethod;
             set
             {
-              
+
                 SetProperty(ref _deliveryMethod, value);
             }
         }
 
-       
+
         private ObservableCollection<DeliveryMethod> _deliveryMethods;
         public ObservableCollection<DeliveryMethod> DeliveryMethods
         {
@@ -90,7 +90,7 @@ namespace RealWorldApp.ViewModels
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 DeliveryMethods = new ObservableCollection<DeliveryMethod>(data);
-               // DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
+                // DeliveryMethods.Add(new DeliveryMethod() { id = 77, description = "Hello King", shortName = "Shortest Name", deliveryTime = "1 Hour", price = 700 });
             });
         }
         private async void PlaceOrderNow(object obj)
@@ -98,13 +98,13 @@ namespace RealWorldApp.ViewModels
 
             //Check the Address for information
 
-            if(DeliveryMethod == 0)
+            if (DeliveryMethod == 0)
             {
                 await Application.Current.MainPage.DisplayAlert("Invalid Input", "Please choose a Delivery Method", "Alright");
                 return;
             }
 
-            if (CurrentAddress.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(CurrentAddress, null)).Any(d=> d.Value == string.Empty))
+            if (CurrentAddress.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public).ToDictionary(prop => prop.Name, prop => (string)prop.GetValue(CurrentAddress, null)).Any(d => d.Value == string.Empty))
             {
                 await Application.Current.MainPage.DisplayAlert("Invalid Input", "Please fill address", "Alright");
                 return;
@@ -127,6 +127,18 @@ namespace RealWorldApp.ViewModels
 
                     IsBusy = true;
                     await Task.Delay(100);
+                    Order response = await DataStore.PlaceOrder(order);
+                    if (response != null)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
+                        Application.Current.MainPage = new NavigationPage(new HomePage());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                    }
+                    MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+
                     //prepare payment
                     PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
 
@@ -135,17 +147,9 @@ namespace RealWorldApp.ViewModels
                     //Here is the partial code for WebAuthencator. 
                     // var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
                     //debug here
-                    Order response = await DataStore.PlaceOrder(order);
-                    if (response != null)
-                    {
-                        MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
-                        await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
-                        Application.Current.MainPage = new NavigationPage(new HomePage());
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
-                    }
+
+                    Application.Current.MainPage = new NavigationPage(new HomePage());
+
                 }
                 catch (Exception ex)
                 {

@@ -9,9 +9,9 @@ namespace RealWorldApp.Models
         public int ProductId { get; set; }
         public string ProductName { get; set; }
         public string PictureUrl { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public int Quantity { get; set; }
 
-        public decimal TotalAmount => Quantity * Price;
+        public double TotalAmount => Quantity * Price;
     }
 }

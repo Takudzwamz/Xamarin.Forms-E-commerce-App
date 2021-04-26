@@ -115,7 +115,9 @@ namespace RealWorldApp.Services
         public async Task<TotalCartItem> GetTotalCartItems()
         {
             var basket = await GetCustomerBasket();
-            return new TotalCartItem() { totalItems = basket.Items.Sum(d => d.Quantity) };
+           // return new TotalCartItem() { totalItems = (int)basket.Items.Sum(d => d.Quantity) };
+            return new TotalCartItem() { totalItems = basket.Items.Count };
+
         }
 
         public async Task<CustomerBasket> GetCustomerBasket()
@@ -208,10 +210,12 @@ namespace RealWorldApp.Services
             return await UpdateCartBasket(basket);
         }
 
-        private async Task<bool> UpdateCartBasket(CustomerBasket basket)
+        public async Task<bool> UpdateCartBasket(CustomerBasket basket)
         {
-            _ = PostAPI(Constants.APIEndpoints.APICart.Basket, basket, out bool IsSucessful);
-            return IsSucessful;
+            //_ = PostAPI(Constants.APIEndpoints.APICart.Basket, basket, out bool IsSucessful);
+            var result = await MakeCall(Url: Constants.APIEndpoints.APICart.Basket, payload: basket, method: Method.POST);
+
+            return !string.IsNullOrEmpty(result);
         }
 
         public async Task<List<OrderByUser>> GetOrdersByUser()

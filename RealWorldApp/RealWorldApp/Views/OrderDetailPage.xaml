@@ -40,14 +40,16 @@
                             <StackLayout Padding="20">
                                 <Label TextColor="Black"
                                        FontSize="Medium"
-                                       Text="{Binding product.name}" />
+                                       Text="{Binding ProductName}" />
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3.3*" />
                                         <ColumnDefinition Width="3.3*" />
+                                        <ColumnDefinition Width="3.3*" />
                                         <ColumnDefinition Width="3.4*" />
                                     </Grid.ColumnDefinitions>
-                                    <StackLayout Grid.Column="0">
+                                    <Image Grid.Column="0" Source="{Binding PictureUrl}" VerticalOptions="StartAndExpand" HeightRequest="150"/>
+                                    <StackLayout Grid.Column="1">
                                         <Label Text="Qty"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
@@ -55,7 +57,7 @@
                                                HorizontalOptions="Center"
                                                Text="{Binding Quantity}" />
                                     </StackLayout>
-                                    <StackLayout Grid.Column="1">
+                                    <StackLayout Grid.Column="2">
                                         <Label Text="Unit Price"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
@@ -63,7 +65,7 @@
                                                HorizontalOptions="Center"
                                                Text="{Binding Price,StringFormat='x {0}'}" />
                                     </StackLayout>
-                                    <StackLayout Grid.Column="2">
+                                    <StackLayout Grid.Column="3">
                                         <Label Text="Sub Total"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
@@ -83,7 +85,7 @@
                                FontSize="Medium"
                                TextColor="#ff5e14" />
                         <Label HorizontalOptions="End"
-                               Text="{Binding TotalPrice}"
+                               Text="{Binding TotalPrice, StringFormat='ZAR {0:F2}'}"
                                FontSize="Medium"
                                TextColor="#80574D" />
                     </StackLayout>
