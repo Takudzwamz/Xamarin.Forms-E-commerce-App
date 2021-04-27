@@ -86,7 +86,8 @@ namespace RealWorldApp.ViewModels
         private async Task GetDeliveryMethods()
         {
             var data = await DataStore.GetDeliveryMethods();
-
+            if (data == null)
+                return;
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 DeliveryMethods = new ObservableCollection<DeliveryMethod>(data);
@@ -117,39 +118,47 @@ namespace RealWorldApp.ViewModels
                   {
                       //Save Address to preference.
                       Preferences.Set(Constants.AddressStore, JsonConvert.SerializeObject(CurrentAddress));
-
+                      PaymentModel paymentData = null;
                       var order = new OrderDto()
                       {
                           ShipToAddress = CurrentAddress,
-                          BasketId = Preferences.Get(Constants.BasketID, string.Empty),
+                          BasketId = Preferences.Get(Constants.UserEmail, string.Empty),
                           DeliveryMethodId = DeliveryMethod
                       };
 
                       IsBusy = true;
                       await Task.Delay(100);
-                      Order response = await DataStore.PlaceOrder(order);
+                      var response = await DataStore.PlaceOrder(order);
                       if (response != null)
+                          paymentData = await DataStore.ProcessPayFastPayment(order);
+                      Device.BeginInvokeOnMainThread(async () =>
                       {
-                          await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
+
+                          if (response != null)
+                          {
+                              await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.id, "Alright");
+                          }
+                          else
+                          {
+                              await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                          }
+                          MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+
+                          //prepare payment
+                          if (paymentData != null) ;
+                          {
+                              //await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
+
+                              //Here is the partial code for WebAuthencator. 
+                              var callbackUrl = new Uri($"{Constants.CALLBACK_SCHEME}://");
+                              var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), callbackUrl);
+                              //you can check here is it was successful and show a success messgae, etc.
+                              //Web Authenticator solved. 
+
+                              
+                          }
                           Application.Current.MainPage = new NavigationPage(new HomePage());
-                      }
-                      else
-                      {
-                          await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
-                      }
-                      MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
-
-                      //prepare payment
-                      PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
-
-                      //await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
-
-                      //Here is the partial code for WebAuthencator. 
-                      var callbackUrl = new Uri($"{Constants.CALLBACK_SCHEME}://");
-                      var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), callbackUrl);
-                      //debug here
-
-                      Application.Current.MainPage = new NavigationPage(new HomePage());
+                      });
 
                   }
                   catch (Exception ex)

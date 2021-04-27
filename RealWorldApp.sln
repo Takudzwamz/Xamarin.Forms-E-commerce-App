@@ -7,7 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealWorldApp.Android", "Rea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealWorldApp.iOS", "RealWorldApp\RealWorldApp.iOS\RealWorldApp.iOS.csproj", "{90397B10-BE2E-4771-8752-EA007F68FA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealWorldApp", "RealWorldApp\RealWorldApp\RealWorldApp.csproj", "{A65008CE-2DA5-424D-8C13-6B14B0DADC69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealWorldApp", "RealWorldApp\RealWorldApp\RealWorldApp.csproj", "{A65008CE-2DA5-424D-8C13-6B14B0DADC69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{75FD4BF0-2E5B-47B0-8E1D-72A90DB93AC3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

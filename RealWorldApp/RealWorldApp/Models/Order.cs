@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RealWorldApp.Models
 {
@@ -17,4 +16,5 @@ namespace RealWorldApp.Models
         public double Total { get; set; }
         public string Status { get; set; }
     }
+
 }

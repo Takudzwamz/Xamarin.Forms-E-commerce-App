@@ -9,7 +9,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
-using System;
 
 namespace RealWorldApp.Services
 {
@@ -40,7 +39,7 @@ namespace RealWorldApp.Services
                 request.AddObject(parameters);
 
             }
-
+            //The token stored on this app has expired/ or just not working. how about we reinstall the app on mobile? yes
             var response = client.Execute(request);
             return response.Content;
         }
@@ -115,32 +114,33 @@ namespace RealWorldApp.Services
         public async Task<TotalCartItem> GetTotalCartItems()
         {
             var basket = await GetCustomerBasket();
-           // return new TotalCartItem() { totalItems = (int)basket.Items.Sum(d => d.Quantity) };
+            // return new TotalCartItem() { totalItems = (int)basket.Items.Sum(d => d.Quantity) };
             return new TotalCartItem() { totalItems = basket.Items.Count };
 
         }
 
         public async Task<CustomerBasket> GetCustomerBasket()
         {
-            if (Preferences.ContainsKey(Constants.BasketID))
-            {
-                var result = await GetAPI($"{Constants.APIEndpoints.APICart.Basket}?id={Preferences.Get(Constants.BasketID, string.Empty)}");
-                return JsonConvert.DeserializeObject<CustomerBasket>(result);
-            }
+
+            var result = await GetAPI($"{Constants.APIEndpoints.APICart.Basket}?id={Preferences.Get(Constants.UserEmail, string.Empty)}");
+
+            var tempBasket = JsonConvert.DeserializeObject<CustomerBasket>(result);
+            if (tempBasket.BasketExists)
+                return tempBasket;
+
             else
-            {
+
                 return await CreateNewBasket();
-            }
+
         }
 
         private async Task<CustomerBasket> CreateNewBasket()
         {
             CustomerBasket basket = new CustomerBasket()
             {
-                Id = System.Guid.NewGuid().ToString(), //Preferences.Get(Constants.UserEmail, string.Empty)  //
+                Id = Preferences.Get(Constants.UserEmail, string.Empty)
 
             };
-            Preferences.Set(Constants.BasketID, basket.Id);
             await UpdateCartBasket(basket);
             return basket;
         }
@@ -174,7 +174,7 @@ namespace RealWorldApp.Services
 
         public async Task<bool> ClearShoppingCart()
         {
-            var result = await DeleteAPI($"{Constants.APIEndpoints.APICart.Basket}?id={Preferences.Get(Constants.BasketID, string.Empty)}");
+            var result = await DeleteAPI($"{Constants.APIEndpoints.APICart.Basket}?id={Preferences.Get(Constants.UserEmail, string.Empty)}");
             return result;
         }
 
@@ -247,15 +247,15 @@ namespace RealWorldApp.Services
 
         }
 
-        public async Task<Order> PlaceOrder(OrderDto order)
+        public async Task<MakeOrderResponse> PlaceOrder(OrderDto order)
         {
             try
             {
                 string result = await PostAPI(Constants.APIEndpoints.Orders.Orders_, order, out bool IsSucessful);
-                Order NewOrder = JsonConvert.DeserializeObject<Order>(result);
+                MakeOrderResponse NewOrder = JsonConvert.DeserializeObject<MakeOrderResponse>(result);
                 return NewOrder;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 return null;
             }
@@ -280,7 +280,8 @@ namespace RealWorldApp.Services
         {
             try
             {
-                var result = await GetAPI(Constants.APIEndpoints.Orders.DeliveryMethod);
+                var result = await MakeCall(Url: Constants.APIEndpoints.Orders.DeliveryMethod, method: Method.GET);
+                //var result = await GetAPI(Constants.APIEndpoints.Orders.DeliveryMethod);
                 var data = JsonConvert.DeserializeObject<List<DeliveryMethod>>(result);
                 return data;
             }

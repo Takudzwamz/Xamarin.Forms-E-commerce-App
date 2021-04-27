@@ -9,7 +9,7 @@ namespace RealWorldApp.Models
         public string shortName { get; set; }
         public string deliveryTime { get; set; }
         public string description { get; set; }
-        public float price { get; set; }
+        public double price { get; set; }
         public int id { get; set; }
     }
 
