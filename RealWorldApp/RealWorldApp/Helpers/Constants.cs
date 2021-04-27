@@ -13,6 +13,7 @@ namespace RealWorldApp.Helpers
         public const string TokenExpirationTime = "tokenExpirationTime";
         public const string BasketID = "basket_id";
         public const string AddressStore = "addressStore";
+        public const string CALLBACK_SCHEME = "myapp";
 
 
 

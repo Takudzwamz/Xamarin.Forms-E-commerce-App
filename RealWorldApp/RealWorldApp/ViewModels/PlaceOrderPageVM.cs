@@ -110,56 +110,57 @@ namespace RealWorldApp.ViewModels
                 return;
             }
 
-            Task.Run(async () =>
-            {
+            _ = Task.Run(async () =>
+              {
 
-                try
-                {
-                    //Save Address to preference.
-                    Preferences.Set(Constants.AddressStore, JsonConvert.SerializeObject(CurrentAddress));
+                  try
+                  {
+                      //Save Address to preference.
+                      Preferences.Set(Constants.AddressStore, JsonConvert.SerializeObject(CurrentAddress));
 
-                    var order = new OrderDto()
-                    {
-                        ShipToAddress = CurrentAddress,
-                        BasketId = Preferences.Get(Constants.BasketID, string.Empty),
-                        DeliveryMethodId = DeliveryMethod
-                    };
+                      var order = new OrderDto()
+                      {
+                          ShipToAddress = CurrentAddress,
+                          BasketId = Preferences.Get(Constants.BasketID, string.Empty),
+                          DeliveryMethodId = DeliveryMethod
+                      };
 
-                    IsBusy = true;
-                    await Task.Delay(100);
-                    Order response = await DataStore.PlaceOrder(order);
-                    if (response != null)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
-                        Application.Current.MainPage = new NavigationPage(new HomePage());
-                    }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
-                    }
-                    MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
+                      IsBusy = true;
+                      await Task.Delay(100);
+                      Order response = await DataStore.PlaceOrder(order);
+                      if (response != null)
+                      {
+                          await Application.Current.MainPage.DisplayAlert("", "Your Order Id is " + response.Id, "Alright");
+                          Application.Current.MainPage = new NavigationPage(new HomePage());
+                      }
+                      else
+                      {
+                          await Application.Current.MainPage.DisplayAlert("Oops", "Something went wrong", "Cancel");
+                      }
+                      MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
 
-                    //prepare payment
-                    PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
+                      //prepare payment
+                      PaymentModel paymentData = await DataStore.ProcessPayFastPayment(order);
 
-                    await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
+                      //await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
 
-                    //Here is the partial code for WebAuthencator. 
-                    // var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), new Uri(paymentData.CallbackLink));
-                    //debug here
+                      //Here is the partial code for WebAuthencator. 
+                      var callbackUrl = new Uri($"{Constants.CALLBACK_SCHEME}://");
+                      var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), callbackUrl);
+                      //debug here
 
-                    Application.Current.MainPage = new NavigationPage(new HomePage());
+                      Application.Current.MainPage = new NavigationPage(new HomePage());
 
-                }
-                catch (Exception ex)
-                {
+                  }
+                  catch (Exception ex)
+                  {
 
-                }
-                finally
-                {
-                    IsBusy = false;
-                }
-            });
+                  }
+                  finally
+                  {
+                      IsBusy = false;
+                  }
+              });
         }
 
         #endregion

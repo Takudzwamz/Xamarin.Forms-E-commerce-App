@@ -4,7 +4,7 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
-
+using RealWorldApp.Helpers;
 
 namespace RealWorldApp.Droid
 {
@@ -32,21 +32,14 @@ namespace RealWorldApp.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        //below is partial code for Web Authenticator too. 
-        const string CALLBACK_SCHEME = "myapp"; //this must be relative to the app bundle. com.appcompany.name
 
-        [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
-        [IntentFilter(new[] { Android.Content.Intent.ActionView },
-            Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable },
-            DataScheme = CALLBACK_SCHEME)]
-        public class WebAuthenticationCallbackActivity : Xamarin.Essentials.WebAuthenticatorCallbackActivity
-        {
-        }
-        protected override void OnResume()
-        {
-            base.OnResume();
-            Xamarin.Essentials.Platform.OnResume(); //this will allow the app to continue the flow of execution 
-        }
+    [Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+        Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable },
+        DataScheme = Constants.CALLBACK_SCHEME)]
+    public class WebAuthenticationCallbackActivity : Xamarin.Essentials.WebAuthenticatorCallbackActivity
+    {
+    }
     }
 
 }
