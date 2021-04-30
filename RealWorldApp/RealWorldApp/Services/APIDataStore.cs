@@ -195,7 +195,7 @@ namespace RealWorldApp.Services
         public async Task<bool> AddItemsToCart(CartItem cart)
         {
             //get the basket. 
-            var basket = await GetCustomerBasket();
+            var basket = await GetCustomerBasket(); //lets debug
 
             int index = basket.Items.FindIndex(d => d.Id == cart.Id);
             if (index == -1) //Item does not exist

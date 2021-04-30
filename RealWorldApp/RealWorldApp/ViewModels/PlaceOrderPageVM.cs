@@ -128,9 +128,9 @@ namespace RealWorldApp.ViewModels
 
                       IsBusy = true;
                       await Task.Delay(100);
-                      var response = await DataStore.PlaceOrder(order);
-                      if (response != null)
-                          paymentData = await DataStore.ProcessPayFastPayment(order);
+                      MakeOrderResponse response = await DataStore.PlaceOrder(order);
+                     // if (response != null)
+                          //paymentData = await DataStore.ProcessPayFastPayment(order);
                       Device.BeginInvokeOnMainThread(async () =>
                       {
 
@@ -145,18 +145,18 @@ namespace RealWorldApp.ViewModels
                           MessagingCenter.Send<object>(this, Constants.Messaging.UpdateCartCount);
 
                           //prepare payment
-                          if (paymentData != null) ;
-                          {
+                        //  if (paymentData != null) ;
+                        //  {
                               //await Browser.OpenAsync(paymentData.PaymentLink, BrowserLaunchMode.SystemPreferred);
 
                               //Here is the partial code for WebAuthencator. 
                               var callbackUrl = new Uri($"{Constants.CALLBACK_SCHEME}://");
-                              var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(paymentData.PaymentLink), callbackUrl);
+                              var authenticationResult = await WebAuthenticator.AuthenticateAsync(new Uri(response.PaymentURl), callbackUrl);
                               //you can check here is it was successful and show a success messgae, etc.
                               //Web Authenticator solved. 
 
                               
-                          }
+                         // }
                           Application.Current.MainPage = new NavigationPage(new HomePage());
                       });
 

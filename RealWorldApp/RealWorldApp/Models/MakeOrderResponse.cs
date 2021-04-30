@@ -14,5 +14,6 @@ namespace RealWorldApp.Models
         public int status { get; set; }
         public object paymentIntentId { get; set; }
         public int id { get; set; }
+        public string PaymentURl { get; set; }
     }
 }

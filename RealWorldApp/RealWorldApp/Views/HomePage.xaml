@@ -112,21 +112,23 @@
                                     </Frame>
                                     <StackLayout Orientation="Horizontal">
                                         <StackLayout HorizontalOptions="CenterAndExpand">
-                                    <Label TextColor="#000000"
+                                            <Label TextColor="#ff5e14"
                                            FontSize="Body"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding name}"/>
-                                    <Label TextColor="#ff5e14"
+                                    <Label TextColor="#000000"
                                            FontSize="Large"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>
-                                        </StackLayout>
-                                        <Button
+                                            <Button Margin="10"
                             Text="Add To Cart" ClassId="{Binding id}"
-                            HorizontalOptions="EndAndExpand"
+                            HorizontalOptions="Fill"
                             CornerRadius="30"
                             BackgroundColor="#ff5e14"
-                            TextColor="White" Clicked="AddToCart_Clicked"/>
+                            TextColor="White" Clicked="AddToCart_Clicked"/>    
+                                            
+                                        </StackLayout>
+                                        
                                     </StackLayout>
                                     
                                 </StackLayout>
@@ -137,7 +139,7 @@
                 </CollectionView.ItemTemplate>
                 
             </CollectionView>
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Orange" IsVisible="{Binding IsBusy}"/>
             <Grid ColumnSpacing="0"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="Start"
