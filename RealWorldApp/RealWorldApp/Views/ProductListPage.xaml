@@ -47,7 +47,7 @@
                        
                        
                         HorizontalOptions="FillAndExpand" 
-                        BackgroundColor="AntiqueWhite"
+                        BackgroundColor="White"
                         Padding="0"
                         CornerRadius="10"
                         HasShadow="True"
@@ -75,7 +75,7 @@
                                            FontSize="Body"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding name}"/>
-                                            <Label TextColor="#000000"
+                                            <Label TextColor="#09052e"
                                            FontSize="Large"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>

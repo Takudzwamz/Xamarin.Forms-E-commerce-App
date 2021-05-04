@@ -26,7 +26,7 @@
                     <StackLayout>
                         <Label Margin="15,170,15,0"
                                Text="Product Categories"
-                               TextColor="Black"
+                               TextColor="#09052e"
                                FontSize="Medium" />
                         <CollectionView ItemsSource="{Binding CategoriesCollection}"
                                          HeightRequest="130"
@@ -46,7 +46,7 @@
                                                 <Frame Padding="0"
                                                        CornerRadius="100"
                                                        IsClippedToBounds="True"
-                                                       BackgroundColor="#FFAD87"
+                                                       BackgroundColor="#ff5e14"
                                                        HeightRequest="50"
                                                        WidthRequest="50"
                                                        HorizontalOptions="Center">
@@ -55,7 +55,7 @@
                                                            VerticalOptions="FillAndExpand"
                                                            Source="{Binding FullImageUrl}"/>
                                                 </Frame>
-                                                    <Label TextColor="#ff5e14"
+                                                    <Label TextColor="#09052e"
                                                        HorizontalTextAlignment="Center"
                                                        FontSize="Medium"
                                                        
@@ -68,7 +68,7 @@
                         </CollectionView>
                         <Label Margin="15,15,15,0"
                                Text="Popular Products"
-                               TextColor="Black"
+                               TextColor="#09052e"
                                FontSize="Medium" />
                     </StackLayout>
                     </DataTemplate>
@@ -85,7 +85,7 @@
                        
                        
                         HorizontalOptions="FillAndExpand" 
-                        BackgroundColor="AntiqueWhite"
+                        BackgroundColor="White"
                         Padding="0"
                         CornerRadius="10"
                         HasShadow="True"
@@ -116,7 +116,7 @@
                                            FontSize="Body"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding name}"/>
-                                    <Label TextColor="#000000"
+                                            <Label TextColor="#09052e"
                                            FontSize="Large"
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>
@@ -159,7 +159,7 @@
                        Grid.Column="0"
                        Grid.RowSpan="4"
                        Grid.ColumnSpan="3"
-                       Source="Slice.png"
+                       Source="banner.png"
                        Aspect="Fill" />
                 <StackLayout Orientation="Horizontal"
                              Grid.Row="1"
@@ -167,8 +167,9 @@
                              Grid.ColumnSpan="3">
                     <Image HorizontalOptions="Start"
                            Margin="20,20,0,0"
-                           Source="menu.png"
-                           HeightRequest="30">
+                           Source="hamburger.png"
+                           HeightRequest="30"
+                           WidthRequest="50">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer x:Name="ImgMenu" Tapped="ImgMenu_Tapped" />
                         </Image.GestureRecognizers>
@@ -186,7 +187,7 @@
                         </Grid.ColumnDefinitions>
                         <Image VerticalOptions="Center"
                                HorizontalOptions="Center"
-                               Source="cart.png"
+                               Source="Shopbag.png"
                                Grid.Row="1"
                                Grid.Column="0"
                                Grid.RowSpan="2"

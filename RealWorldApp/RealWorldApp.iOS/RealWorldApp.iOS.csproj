@@ -209,15 +209,6 @@
     <BundleResource Include="Resources\logout%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\menu%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\menu%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\minus.png" />
   </ItemGroup>
   <ItemGroup>
@@ -285,5 +276,17 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shoppingcart.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Menu.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shopbag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\hamburger.png" />
   </ItemGroup>
 </Project>

@@ -47,7 +47,7 @@
             <ListView ItemsSource="{Binding ShoppingCartCollection}"
                       SelectionMode="None"
                       HasUnevenRows="True"
-                      SeparatorColor="#80574D">
+                      SeparatorColor="#09052e">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -67,18 +67,18 @@
                                        Text="{Binding ProductName}"/>
                                 <StackLayout Orientation="Horizontal">
                                     <Label CharacterSpacing="1"
-                                           TextColor="#80574D"
+                                           TextColor="#09052e"
                                            FontSize="Medium"
                                            Text="{Binding Quantity}"/>
                                     <Label Text="X"
-                                           TextColor="#80574D"
+                                           TextColor="#09052e"
                                            FontSize="Medium" />
                                     <Label CharacterSpacing="1"
-                                           TextColor="#80574D"
+                                           TextColor="#09052e"
                                            FontSize="Medium"
                                            Text="{Binding price}"/>
                                     <Label CharacterSpacing="1"
-                                           TextColor="#80574D"
+                                           TextColor="#09052e"
                                            FontSize="Medium"
                                            HorizontalOptions="EndAndExpand"
                                            Text="{Binding totalAmount ,StringFormat='ZAR {0}'}"/>
@@ -114,13 +114,13 @@
                            TextColor="#ff5e14"
                            FontSize="Medium" />
                     <Label CharacterSpacing="1" x:Name="LblTotalPrice"
-                                           TextColor="#80574D"
+                                           TextColor="#09052e"
                                            FontSize="Medium"
                                            Text="{Binding TotalPrice,Mode=TwoWay, StringFormat='ZAR {0:F2}'}"/>
                 </StackLayout>
                 <Button HorizontalOptions="FillAndExpand"
                         BackgroundColor="#ff5e14"
-                        CornerRadius="30"
+                        CornerRadius="40"
                         TextColor="White"
                         Text="Proceed" Command="{Binding ProceedCommand}"/>
             </StackLayout>

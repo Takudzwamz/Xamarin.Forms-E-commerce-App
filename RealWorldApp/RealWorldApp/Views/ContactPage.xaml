@@ -34,6 +34,7 @@
                            Margin="0,10,0,10"
                            CornerRadius="30">
                 <Label Margin="20"
+                       TextColor="#09052e"
                    Text="For further support you can call our helpline,visit us or email us using the options below"
                    FontSize="Body" /></Frame>
 
@@ -43,6 +44,7 @@
                            Margin="0,10,0,10"
                            CornerRadius="30">
                 <Label Margin="20"
+                       TextColor="#09052e"
                    Text="Our Address: 72, 10th Road Kew, Johannesburg."
                    FontSize="Body" />
             </Frame>
@@ -54,6 +56,7 @@
                            CornerRadius="30">
                 
                 <Label Margin="20"
+                       TextColor="#09052e"
                    Text="Our Email address: info@swiftgas.co.za."
                    FontSize="Body" />
             </Frame>
@@ -63,7 +66,7 @@
                            Padding="5"
                            Margin="0,10,0,10"
                            CornerRadius="30">
-                    <Entry Text="" Placeholder="Type info@swiftgas.co.za here!!!" x:Name="EntryEmail"/>
+                    <Entry Text=""  Placeholder="Type info@swiftgas.co.za here!!!" x:Name="EntryEmail"/>
             </Frame>
             
             <Frame HasShadow="True"

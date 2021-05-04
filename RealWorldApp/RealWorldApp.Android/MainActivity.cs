@@ -23,7 +23,7 @@ namespace RealWorldApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            Window.SetStatusBarColor(Color.Rgb(255, 173, 135));
+            Window.SetStatusBarColor(Color.Rgb(255, 94, 20));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

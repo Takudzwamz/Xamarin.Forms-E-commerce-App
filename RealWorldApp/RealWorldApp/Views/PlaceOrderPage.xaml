@@ -115,50 +115,50 @@
                            HorizontalTextAlignment="Center"
                            TextColor="#ff5e14" />
                                 <Entry Placeholder="First Name"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.FirstName, Mode=TwoWay}"
                            Keyboard="Text" />
                                 <Entry Placeholder="Last Name"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.LastName, Mode=TwoWay}"
                            Keyboard="Text" />
                                 <Entry Placeholder="Phone"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.PhoneNumber, Mode=TwoWay}"
                            Keyboard="Numeric" />
                                 <Entry Placeholder="Street"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.Street, Mode=TwoWay}"
                            Keyboard="Text" />
                                 <Entry Placeholder="City"
                             HeightRequest="100"
-                            PlaceholderColor="#80574D"
-                            TextColor="#80574D"
+                            PlaceholderColor="#09052e"
+                            TextColor="#09052e"
                            Text="{Binding CurrentAddress.City, Mode=TwoWay}"
                             Keyboard="Text" />
                                 <Entry Placeholder="State"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.State, Mode=TwoWay}"
                            Keyboard="Text" />
                                 <Entry Placeholder="ZipCode"
-                           PlaceholderColor="#80574D"
-                           TextColor="#80574D"
+                           PlaceholderColor="#09052e"
+                           TextColor="#09052e"
                            Text="{Binding CurrentAddress.Zipcode, Mode=TwoWay}"
                            Keyboard="Numeric" />
                             </StackLayout>
                         </Frame>
 
                     </StackLayout>
-                
-                    <Label Text="Choose Delivery Method" FontSize="Large" Margin="25,0,0,0"/>
+
+                    <Label TextColor="#ff5e14" Text="Choose Delivery Method" FontSize="Large" Margin="25,0,0,0"/>
                     <StackLayout BindableLayout.ItemsSource="{Binding DeliveryMethods}" Orientation="Vertical" Margin="25" RadioButtonGroup.SelectedValue="{Binding DeliveryMethod}" RadioButtonGroup.GroupName="delivery">
                     <BindableLayout.EmptyView>
-                        <Label Text="No Delivery Method"/>
+                            <Label TextColor="#09052e" Text="No Delivery Method"/>
                     </BindableLayout.EmptyView>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -172,10 +172,10 @@
                                 </Grid.RowDefinitions>
                                 <RadioButton Value="{Binding id}" Grid.Row="0" Grid.Column="0"/>
                                 <StackLayout Grid.Column="1" Grid.Row="0">
-                                <Label Text="{Binding shortName}" FontAttributes="Bold" />
-                                    <Label Text="{Binding deliveryTime, StringFormat='Time: {0}'}" />
-                                    <Label Text="{Binding description}" />
-                                    <Label Text="{Binding price, StringFormat='ZAR {0}'}" />
+                                        <Label TextColor="#09052e" Text="{Binding shortName}" FontAttributes="Bold" />
+                                        <Label TextColor="#09052e" Text="{Binding deliveryTime, StringFormat='Time: {0}'}" />
+                                        <Label TextColor="#09052e" Text="{Binding description}" />
+                                        <Label TextColor="#09052e" Text="{Binding price, StringFormat='ZAR {0}'}" />
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>
@@ -185,6 +185,8 @@
                 <Button Text="Place My Order"
                     BackgroundColor="#ff5e14"
                     TextColor="White"
+                        CornerRadius="30"
+                        Margin="20"
                    Command="{Binding OrderCommand}"/>
                     <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
                 </StackLayout>

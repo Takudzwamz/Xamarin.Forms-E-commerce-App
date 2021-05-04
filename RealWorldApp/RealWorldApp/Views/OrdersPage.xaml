@@ -48,15 +48,15 @@
                                     <StackLayout HorizontalOptions="EndAndExpand">
                                         <Label Text="Made on"
                                                TextColor="Gray" />
-                                        <Label TextColor="Black"
+                                        <Label TextColor="#ff5e14"
                                                Text="{Binding OrderDate}"/>
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="Total"
-                                           TextColor="Black" />
+                                           TextColor="#09052e" />
                                     <Label  HorizontalOptions="EndAndExpand"
-                                            TextColor="Black"
+                                            TextColor="#09052e"
                                             Text="{Binding Total,StringFormat='ZAR {0:F2}'}"/>
                                 </StackLayout>
                             </StackLayout>

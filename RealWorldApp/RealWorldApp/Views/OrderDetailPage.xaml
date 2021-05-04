@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.OrderDetailPage"
-             BackgroundColor="FloralWhite">
+             BackgroundColor="White">
     <!--<ContentPage.BindingContext>
         <viewmodels:OrderDetailPageVM/>
     </ContentPage.BindingContext>-->
@@ -25,7 +25,7 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Grid.Column="1"
-                       TextColor="#CE0B06"
+                       TextColor="#ff5e14"
                        Text="Order Details"
                        FontSize="Large"
                        FontAttributes="Bold"
@@ -38,7 +38,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="20">
-                                <Label TextColor="Black"
+                                <Label TextColor="#09052e"
                                        FontSize="Medium"
                                        Text="{Binding ProductName}" />
                                 <Grid>
@@ -53,7 +53,7 @@
                                         <Label Text="Qty"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
-                                        <Label TextColor="#80574D"
+                                        <Label TextColor="#09052e"
                                                HorizontalOptions="Center"
                                                Text="{Binding Quantity}" />
                                     </StackLayout>
@@ -61,7 +61,7 @@
                                         <Label Text="Unit Price"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
-                                        <Label TextColor="#80574D"
+                                        <Label TextColor="#09052e"
                                                HorizontalOptions="Center"
                                                Text="{Binding Price,StringFormat='x {0}'}" />
                                     </StackLayout>
@@ -69,7 +69,7 @@
                                         <Label Text="Sub Total"
                                                TextColor="#ff5e14"
                                                HorizontalOptions="Center" />
-                                        <Label TextColor="#80574D"
+                                        <Label TextColor="#09052e"
                                                HorizontalOptions="Center"
                                                Text="{Binding TotalAmount , StringFormat='ZAR {0}'}"/>
                                     </StackLayout>
@@ -87,7 +87,7 @@
                         <Label HorizontalOptions="End"
                                Text="{Binding TotalPrice, StringFormat='ZAR {0:F2}'}"
                                FontSize="Medium"
-                               TextColor="#80574D" />
+                               TextColor="#09052e" />
                     </StackLayout>
                 </ListView.Footer>
             </ListView>
