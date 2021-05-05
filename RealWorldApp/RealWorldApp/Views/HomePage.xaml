@@ -29,7 +29,12 @@
                                TextColor="#09052e"
                                FontSize="Large"
                                HorizontalTextAlignment="Center"/>
-                        <CollectionView ItemsSource="{Binding CategoriesCollection}"
+                            <Label Margin="15,0,15,0"
+                               Text="Scroll horizontally to see more categories."
+                               TextColor="#09052e"
+                               FontSize="Caption"
+                               HorizontalTextAlignment="Center"/>
+                            <CollectionView ItemsSource="{Binding CategoriesCollection}"
                                          HeightRequest="130"
                                          SelectionMode="Single"
                                          SelectionChanged="CvCategories_SelectionChanged">
@@ -45,23 +50,24 @@
                                                HasShadow="True">
                                             <StackLayout Orientation="Vertical">
                                                 <Frame Padding="0"
-                                                       CornerRadius="50"
+                                                       CornerRadius="30"
                                                        IsClippedToBounds="True"
                                                        BackgroundColor="#ff5e14"
-                                                       HeightRequest="50"
-                                                       WidthRequest="50"
-                                                       HorizontalOptions="Center">
-                                                    <Image Aspect="AspectFill"
-                                                           HorizontalOptions="FillAndExpand"
-                                                           VerticalOptions="FillAndExpand"
-                                                           Source="{Binding FullImageUrl}"/>
-                                                    
-                                                </Frame>
-                                                    <Label TextColor="#09052e"
+                                                       HeightRequest="40"
+                                                       WidthRequest="160"
+                                                       Margin="5,10,1,10"
+                                                       HorizontalOptions="FillAndExpand">
+                                                
+                                                      <Label TextColor="white"
                                                        HorizontalTextAlignment="Center"
+                                                             VerticalTextAlignment="Center"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       
                                                        FontSize="Medium"
                                                        TextDecorations="None"
                                                        Text="{Binding name}"/>
+                                                </Frame>
+                                                  
                                                    
                                                 </StackLayout>
                                         </Frame>
@@ -69,7 +75,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        <Label Margin="15,-25,15,0"
+                        <Label Margin="15,-65,15,0"
                                Text="Popular Products"
                                TextColor="#09052e"
                                FontSize="Large"
