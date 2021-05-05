@@ -27,7 +27,8 @@
                         <Label Margin="15,170,15,0"
                                Text="Product Categories"
                                TextColor="#09052e"
-                               FontSize="Medium" />
+                               FontSize="Large"
+                               HorizontalTextAlignment="Center"/>
                         <CollectionView ItemsSource="{Binding CategoriesCollection}"
                                          HeightRequest="130"
                                          SelectionMode="Single"
@@ -44,7 +45,7 @@
                                                HasShadow="True">
                                             <StackLayout Orientation="Vertical">
                                                 <Frame Padding="0"
-                                                       CornerRadius="100"
+                                                       CornerRadius="50"
                                                        IsClippedToBounds="True"
                                                        BackgroundColor="#ff5e14"
                                                        HeightRequest="50"
@@ -54,22 +55,25 @@
                                                            HorizontalOptions="FillAndExpand"
                                                            VerticalOptions="FillAndExpand"
                                                            Source="{Binding FullImageUrl}"/>
+                                                    
                                                 </Frame>
                                                     <Label TextColor="#09052e"
                                                        HorizontalTextAlignment="Center"
                                                        FontSize="Medium"
-                                                       
+                                                       TextDecorations="None"
                                                        Text="{Binding name}"/>
-                                            </StackLayout>
+                                                   
+                                                </StackLayout>
                                         </Frame>
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        <Label Margin="15,15,15,0"
+                        <Label Margin="15,-25,15,0"
                                Text="Popular Products"
                                TextColor="#09052e"
-                               FontSize="Medium" />
+                               FontSize="Large"
+                               HorizontalTextAlignment="Center"/>
                     </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate >
