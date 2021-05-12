@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
+             xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:sh="http://sharpnado.com"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.HomePage"
              BackgroundColor="White"
@@ -22,9 +24,9 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
-                        
-                    <StackLayout>
-                        <Label Margin="15,170,15,0"
+
+                        <StackLayout>
+                            <Label Margin="15,170,15,0"
                                Text="Product Categories"
                                TextColor="#09052e"
                                FontSize="Large"
@@ -38,18 +40,20 @@
                                          HeightRequest="130"
                                          SelectionMode="Single"
                                          SelectionChanged="CvCategories_SelectionChanged">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Frame Padding="0"
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal">
+                                            
+                                            
+                                            <Frame Padding="0"
                                                BackgroundColor="Transparent"
                                                Margin="10,0,10,0"
                                                HasShadow="True">
-                                            <StackLayout Orientation="Vertical">
-                                                <Frame Padding="0"
+                                                <StackLayout Orientation="Vertical">
+                                                    <Frame Padding="0"
                                                        CornerRadius="30"
                                                        IsClippedToBounds="True"
                                                        BackgroundColor="#ff5e14"
@@ -57,8 +61,8 @@
                                                        WidthRequest="160"
                                                        Margin="5,10,1,10"
                                                        HorizontalOptions="FillAndExpand">
-                                                
-                                                      <Label TextColor="white"
+
+                                                        <Label TextColor="white"
                                                        HorizontalTextAlignment="Center"
                                                              VerticalTextAlignment="Center"
                                                        HorizontalOptions="FillAndExpand"
@@ -66,40 +70,51 @@
                                                        FontSize="Medium"
                                                        TextDecorations="None"
                                                        Text="{Binding name}"/>
-                                                </Frame>
-                                                  
-                                                   
+                                                    </Frame>
+
+
                                                 </StackLayout>
-                                        </Frame>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                        <Label Margin="15,-65,15,0"
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label Margin="15,-65,15,0"
                                Text="Popular Products"
                                TextColor="#09052e"
                                FontSize="Large"
                                HorizontalTextAlignment="Center"/>
-                    </StackLayout>
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate >
 
                 <CollectionView.ItemTemplate  temsLayout="VerticalList">
                     <DataTemplate>
-                        <StackLayout 
-                        
-                        HorizontalOptions="Center" 
-                                     Padding="20,10,20,10"
-                                    >
-                            <Frame
-                       
-                       
-                        HorizontalOptions="FillAndExpand" 
-                        BackgroundColor="White"
-                        Padding="0"
-                        CornerRadius="10"
-                        HasShadow="True"
-                        >
+                        <StackLayout  HorizontalOptions="Center" 
+                                     Padding="20,10,20,10">
+                            <sh:Shadows x:Name="CatShadows"  
+                                        CornerRadius="10">
+                                <sh:Shadows.Shades>
+                                    <sh:ImmutableShades>
+                                        <sh:Shade BlurRadius="10"
+                                           Opacity="0.2"
+                                           Offset="-10,-10"
+                                           Color="#ff5e14" />
+                                        <sh:Shade BlurRadius="10"
+                                                  Opacity="0.2"
+                                                  Offset="10,10"
+                                                  Color="#09052e" />
+                                    </sh:ImmutableShades>
+                                </sh:Shadows.Shades>
+
+                                <PanCake:PancakeView Grid.Row="1" CornerRadius="10,0,90,90">
+                                    <Grid>
+                                      <Frame
+                            HorizontalOptions="FillAndExpand" 
+                            BackgroundColor="#f7f9f9"
+                            Padding="0"
+                            CornerRadius="10"
+                            HasShadow="True">
                                 <StackLayout 
                                       Padding="0"
                                       VerticalOptions="FillAndExpand"
@@ -109,16 +124,17 @@
                                          >
 
                                     <Frame Padding="0"
-                              
+                                    CornerRadius="10"
                                    HeightRequest="200"
                                    HorizontalOptions="FillAndExpand" 
                                     >
                                         <Image Aspect="Fill"
+                                               
                                        Source="{Binding pictureUrl}"/>
-                                        
-                                        
-                                        
-                                        
+
+
+
+
                                     </Frame>
                                     <StackLayout Orientation="Horizontal">
                                         <StackLayout HorizontalOptions="CenterAndExpand">
@@ -131,23 +147,30 @@
                                        HorizontalTextAlignment="Center"
                                        Text="{Binding price ,StringFormat='ZAR {0}'}"/>
                                             <Button Margin="10"
-                            Text="Add To Cart" ClassId="{Binding id}"
-                            HorizontalOptions="Fill"
-                            CornerRadius="30"
-                            BackgroundColor="#ff5e14"
-                            TextColor="White" Clicked="AddToCart_Clicked"/>    
-                                            
+                                            Text="Add To Cart" ClassId="{Binding id}"
+                                            HorizontalOptions="Fill"
+                                            CornerRadius="30"
+                                            BackgroundColor="#ff5e14"
+                                            TextColor="White" Clicked="AddToCart_Clicked"/>
+
                                         </StackLayout>
-                                        
+
                                     </StackLayout>
-                                    
+
                                 </StackLayout>
-                            </Frame>
+                            </Frame>  
+                                    </Grid>
+                                   
+                                </PanCake:PancakeView>
+                                
+                            </sh:Shadows>
+
+                            
                         </StackLayout>
                     </DataTemplate>
-                    
+
                 </CollectionView.ItemTemplate>
-                
+
             </CollectionView>
             <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Orange" IsVisible="{Binding IsBusy}"/>
             <Grid ColumnSpacing="0"

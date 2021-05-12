@@ -21,8 +21,8 @@
                                
                                Margin="5"
                                VerticalOptions="Center" />
-                
-                <Frame HasShadow="True" Padding="25" Margin="0,30,0,30" CornerRadius="30" BackgroundColor="AntiqueWhite">
+
+                <Frame HasShadow="True" Padding="25" Margin="0,30,0,30" CornerRadius="30" BackgroundColor="#f7f9f9">
                     <StackLayout>
                         <Label Text="Create An Account"
                                FontAttributes="Bold"
@@ -34,9 +34,9 @@
                            Margin="0,10,0,10"
                            CornerRadius="30">
                             <Entry Placeholder="Full Name"
-                               PlaceholderColor="#715f73"
+                               PlaceholderColor="#09052e"
                                HorizontalTextAlignment="Start"
-                               TextColor="#715f73"
+                               TextColor="#09052e"
                                Keyboard="Text" Text="{Binding RegisterData.DisplayName, Mode=TwoWay}" />
                         </Frame>
                         <Frame HasShadow="True"
@@ -44,9 +44,9 @@
                            Margin="0,10,0,10"
                            CornerRadius="30">
                             <Entry Placeholder="Email"
-                               PlaceholderColor="#715f73"
+                               PlaceholderColor="#09052e"
                                HorizontalTextAlignment="Start"
-                               TextColor="#715f73"
+                               TextColor="#09052e"
                                Keyboard="Email" Text="{Binding RegisterData.Email, Mode=TwoWay}"/>
                         </Frame>
                         <Frame HasShadow="True"
@@ -54,9 +54,9 @@
                                Margin="0,10,0,10"
                                CornerRadius="30">
                             <Entry Placeholder="Password"
-                               PlaceholderColor="#715f73"
+                               PlaceholderColor="#09052e"
                                HorizontalTextAlignment="Start"
-                               TextColor="#715f73"
+                               TextColor="#09052e"
                                IsPassword="True"
                                Keyboard="Default" Text="{Binding RegisterData.Password, Mode=TwoWay}" />
                         </Frame>
@@ -65,9 +65,9 @@
                                Margin="0,10,0,10"
                                CornerRadius="30">
                             <Entry Placeholder="Confirm Password"
-                               PlaceholderColor="#715f73"
+                               PlaceholderColor="#09052e"
                                HorizontalTextAlignment="Start"
-                               TextColor="#715f73"
+                               TextColor="#09052e"
                                IsPassword="True"
                                Keyboard="Default" Text="{Binding TempPassword, Mode=TwoWay}" />
                         </Frame>
@@ -75,7 +75,7 @@
                         <Label Margin="20,0,20,0"
                                FontSize="Small"
                                HorizontalTextAlignment="Center"
-                               TextColor="#3c343d"
+                               TextColor="#09052e"
                                Text="By creating an account you agree to our Terms of Service and Privacy Policy" />
                     </StackLayout>
                 </Frame>
@@ -87,7 +87,7 @@
                 <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
                 <Label Text="Already have an account?"
                        HorizontalTextAlignment="Center"
-                       TextColor="#3c343d" />
+                       TextColor="#09052e" />
                 <Button Text="Login"
                         BackgroundColor="#ff5e14"
                         TextColor="White"

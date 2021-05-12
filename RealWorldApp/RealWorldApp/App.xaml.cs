@@ -14,6 +14,7 @@ namespace RealWorldApp
         {
             InitializeComponent();
 
+            Sharpnado.Shades.Initializer.Initialize(loggerEnable: false);
             DependencyService.Register<APIDataStore>();
 
             if (Preferences.ContainsKey(Constants.AccessToken))

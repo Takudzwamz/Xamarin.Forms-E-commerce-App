@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels" xmlns:sh="http://sharpnado.com"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.LoginPage"
              
@@ -30,14 +30,21 @@
                 </Image>
 
             </Grid>
+            
+            
             <Image Source="sg.png"
                                
                                Margin="5"
                                VerticalOptions="Center" />
-            <Frame HasShadow="True"
+            
+            <sh:Shadows Grid.Row="1"  
+            Grid.Column="0"
+            CornerRadius="30"
+            Shades="{sh:NeumorphismShades}">
+               <Frame 
                    Padding="25"
                    Margin="0,20,0,50"
-                   BackgroundColor="AntiqueWhite"
+                   BackgroundColor="#f7f9f9"
                    CornerRadius="30">
                 <StackLayout Margin="0,60,0,60">
                     <Label Text="Sign In"
@@ -45,25 +52,25 @@
                            FontSize="Title"
                            HorizontalTextAlignment="Center"
                            TextColor="#ff5e14" />
-                    <Frame HasShadow="True"
+                    <Frame 
                            Padding="5"
                            Margin="0,10,0,10"
                            CornerRadius="30">
                         <Entry Placeholder="Email"
-                           PlaceholderColor="#715f73"
+                           PlaceholderColor="#09052e"
                            HorizontalTextAlignment="Start"
-                           TextColor="#715f73"
+                           TextColor="#09052e"
                            Text="{Binding LoginData.Email, Mode=TwoWay}"
                            Keyboard="Email" />
                     </Frame>
-                    <Frame HasShadow="True"
+                    <Frame
                            Padding="5"
                            Margin="0,10,0,10"
                            CornerRadius="30">
                         <Entry Placeholder="Password"
-                           PlaceholderColor="#715f73"
+                           PlaceholderColor="#09052e"
                            HorizontalTextAlignment="Start"
-                           TextColor="#715f73"
+                           TextColor="#09052e"
                            IsPassword="True"
                           Text="{Binding LoginData.Password,Mode=TwoWay}"
                            Keyboard="Default" />
@@ -71,6 +78,9 @@
 
                 </StackLayout>
             </Frame>
+            </sh:Shadows>
+
+            
             <Button Text="Login"
                     BackgroundColor="#ff5e14"
                     TextColor="White"

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
              xmlns:models="clr-namespace:RealWorldApp.Models"
              mc:Ignorable="d"
@@ -16,13 +17,15 @@
         <ScrollView>
             <StackLayout>
                 <Grid>
+                    
+                    
                     <Image Source="{Binding CurrentProduct.pictureUrl}"
                            Aspect="Fill"
-                           HeightRequest="300" />
+                           HeightRequest="250" />
                     <Image Source="close"
                            HeightRequest="40"
                            WidthRequest="40"
-                           Margin="10,20,20,20"
+                           Margin="10,20,10,20"
                            VerticalOptions="Start"
                            HorizontalOptions="Start">
                         <Image.GestureRecognizers>
@@ -30,31 +33,25 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
-                <StackLayout Margin="20">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding CurrentProduct.name}"
-                               TextColor="#09052e"
-                               HorizontalOptions="Start"
-                               FontSize="Large" />
-                        <StackLayout HorizontalOptions="EndAndExpand"
-                                     Orientation="Horizontal">
+               
 
-                            <Label Text="ZAR"
+                <StackLayout Grid.Row="1" Margin="-6"  BackgroundColor="#ff5e14">
+                    <PanCake:PancakeView Grid.Row="1" CornerRadius="-50,50,50,-50">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" Padding="20,15,20,0" BackgroundColor="White" HeightRequest="300">
+                            <Label Grid.Row="0" Text="Product Detail" FontAttributes="Bold" TextColor="#09052e"/>
+                            <Label Grid.Row="1" Text="{Binding CurrentProduct.name}" TextColor="#ff5e14" FontSize="30" FontAttributes="Bold"/>
+                            <StackLayout HorizontalOptions="EndAndExpand"
+                                     Orientation="Horizontal">
+                                <Label Text="ZAR"
                                    TextColor="#09052e"
                                    FontSize="Large" />
-                            <Label Text="{Binding CurrentProduct.price}"
-                                   TextColor="#ff5e14"
-                                   FontSize="Large" />
-
-                        </StackLayout>
-                    </StackLayout>
-                    <Label Text="Product Detail"
-                           TextColor="#ff5e14"
-                           FontSize="Large"
-                           Margin="0,10,0,0" />
-                    <Label Text="{Binding CurrentProduct.description}"
-                           TextColor="#09052e"
-                           FontSize="Body" />
+                                <Label Grid.Row="1" Text="{Binding CurrentProduct.price}" FontSize="25" Padding="0,00" TextColor="#ff5e14" FontAttributes="Bold"/>
+                            </StackLayout>
+                            <Label Grid.Row="4" Text="{Binding CurrentProduct.description}" TextColor="#09052e"/>
+                            
+                            
+                        </Grid>
+                    </PanCake:PancakeView>
                 </StackLayout>
 
                 <Grid>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:viewmodels="clr-namespace:RealWorldApp.ViewModels"
+              xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.CartPage"
              BackgroundColor="White">
@@ -26,8 +27,9 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Grid.Column="1"
+                       Margin="20,-10,20,-10"
                        TextColor="#ff5e14"
-                       Text="Your Cart"
+                       Text="Shopping Cart"
                        FontSize="Large"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center" />
@@ -44,7 +46,9 @@
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-            <ListView ItemsSource="{Binding ShoppingCartCollection}"
+            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Start" >
+                <PanCake:PancakeView Grid.Row="1" BackgroundColor="#f7f9f9" CornerRadius="30,30,30,30">
+                   <ListView ItemsSource="{Binding ShoppingCartCollection}"
                       SelectionMode="None"
                       HasUnevenRows="True"
                       SeparatorColor="#09052e">
@@ -105,6 +109,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+                </PanCake:PancakeView>
+            </StackLayout>
+            
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="EndAndExpand">
