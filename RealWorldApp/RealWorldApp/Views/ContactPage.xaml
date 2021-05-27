@@ -3,94 +3,251 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:AppName" 
+             xmlns:grial="clr-namespace:AppName.Core;assembly=AppName.Core" 
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" 
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:sh="http://sharpnado.com"
              mc:Ignorable="d"
              x:Class="RealWorldApp.Pages.ContactPage"
              BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Grid Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="8*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Image Source="backarrow.png"
+        <ScrollView>
+            <StackLayout>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="backarrow.png"
                        Grid.Column="0"
                        HorizontalOptions="Center">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped" />
-                    </Image.GestureRecognizers>
-                </Image>
-                <Label Grid.Column="1"
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="TapBack" Tapped="TapBack_Tapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Grid.Column="1"
                        TextColor="#ff5e14"
-                       Text="Contact Us"
+                       Text="About Us"
                        FontSize="Large"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center" />
-            </Grid>
-            <Frame
-                HasShadow="True"
-                           Padding="5"
-                           Margin="0,10,0,10"
-                           CornerRadius="30">
-                <Label Margin="20"
-                       TextColor="#09052e"
-                   Text="For further support you can call our helpline,visit us or email us using the options below"
-                   FontSize="Body" /></Frame>
+                </Grid>
 
-            <Frame
-                HasShadow="True"
-                           Padding="5"
-                           Margin="0,10,0,10"
-                           CornerRadius="30">
-                <Label Margin="20"
-                       TextColor="#09052e"
-                   Text="Our Address: 72, 10th Road Kew, Johannesburg."
-                   FontSize="Body" />
-            </Frame>
 
-            <Frame
-                HasShadow="True"
-                           Padding="5"
-                           Margin="0,10,0,10"
-                           CornerRadius="30">
-                
-                <Label Margin="20"
-                       TextColor="#09052e"
-                   Text="Our Email address: info@swiftgas.co.za."
-                   FontSize="Body" />
-            </Frame>
+                <Grid
+                Padding="20"
+                RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition 
+                    Height="290"/>
+                        <RowDefinition
+						Height="Auto" />
+                        <RowDefinition
+						Height="170" />
+                        <RowDefinition
+						Height="50" />
+                        <RowDefinition
+						Height="Auto" />
+                        <RowDefinition
+						Height="50" />
+                    </Grid.RowDefinitions>
 
-            
-            <Frame HasShadow="True"
+
+
+                    <Image
+                    Grid.Row="0"
+					Grid.RowSpan="2"
+					Margin="-20,-20,-20,0"
+					Source="bg.jpg"
+					HeightRequest="367"
+					VerticalOptions="Start"
+					Aspect="AspectFill"
+                    />
+                    
+                    
+                    <!-- CARD -->
+                    <Frame
+					CornerRadius="10"
+					Grid.Row="1"
+					Padding="20,16"
+					>
+
+                        <StackLayout
+						Spacing="10">
+
+                            <!-- Date -->
+                            <Label
+							VerticalOptions="Center"
+                            TextColor="#09052e"
+							Text="Your partner in anything and everything Gas"
+							FontSize="12"
+							Opacity="0.5" />
+
+                            <!-- Title -->
+                            <Label
+							VerticalOptions="Center"
+							Text="Swift Gas"
+							FontSize="30"
+                            TextColor="#09052e"
+							FontFamily="Times Roman"/>
+
+
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="LEARN ABOUT US"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+                            <!-- Text block 1 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                   TextColor="#09052e"
+							Text="Do you need some work done that involves LP Gas? Then look no further. Swift Gas is your partner in anything and everything gas. We will assist you with all your LP gas sales installations, maintenance, and repairs for any kind of setting. This covers residential areas (including houses, flats, complexes, hostels, etc.); as well as commercial establishments (such as hotels, restaurants, shops, bakeries, etc." />
+
+                            </Grid>
+
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="OUR MISSION"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+
+                            <!-- Text block 2 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                     TextColor="#09052e"
+							Text="Our mission is to save our clientele on fuel costs through distributing to them LP gas and gas products fast at cheap prices. Our innovative solution is designed to save you time and money on the much-needed gas product for your home or organization. We are here for your convenience; when you call, we come all the way to your doorstep – fast!" />
+                            </Grid>
+
+
+
+                            <Grid
+							Margin="-20,0">
+                                <!--Gallery-->
+                                <Image
+								Source="bg.jpg"
+								HeightRequest="160"
+								>
+                                </Image>
+                            </Grid>
+
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="OUR UNIQUE SERVICE OFFERING"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+                            <!-- Text block 2 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                    TextColor="#09052e"
+							Text="We are a distributor of Wasaa LP Gas cylinders, valves, lab gas tapes, as well as LP gas electric. We design and install LP Gas retail shops and also assist in LP Gas appliance repairs or recommendations. Our 24/7 service means that we are ready to serve you at any time. Contact us now for assistance. We provide Maintenance support for all gas products. We do door to door deliveries. We an esteemed distributer of Wasaa 3kg, 5kg, 9kg, 14kg, 19kg and 48kg Liquefied Petroleum Gas cylinders on a full for empty exchange system same-day delivery to your door. " />
+                            </Grid>
+
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="CONTACT US"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+                            <!-- Text block 2 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                    TextColor="#09052e"
+							Text="For further support you can call our helpline,visit us or email us using the options below" />
+                            </Grid>
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="OUR ADDRESS"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+                            <!-- Text block 2 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                    TextColor="#09052e"
+							Text="72, 10th Road Kew, Johannesburg." />
+                            </Grid>
+
+                            <Grid>
+                                <!-- Category -->
+                                <Label
+								Text="OUR EMAIL ADDRESS"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+
+                            </Grid>
+
+                            <!-- Text block 2 -->
+                            <Grid Margin="0,5,0,10">
+                                <Label
+                                    TextColor="#09052e"
+							Text="info@swiftgas.co.za." />
+                            </Grid>
+                            <Frame HasShadow="True"
                            Padding="5"
                            Margin="0,10,0,10"
                            CornerRadius="30">
-                    <Entry Text=""  Placeholder="Type info@swiftgas.co.za here!!!" x:Name="EntryEmail"/>
-            </Frame>
-            
-            <Frame HasShadow="True"
+                                <Entry Text=""  Placeholder="Type info@swiftgas.co.za here!!!" x:Name="EntryEmail"/>
+                            </Frame>
+
+                            <Frame HasShadow="True"
                            Padding="5"
                            Margin="0,10,0,10"
                            CornerRadius="30">
-                  <Entry  Text="" Placeholder="Subject" x:Name="EntrySubject"/>
-            </Frame>
-            <Button Text="Submit"
+                                <Entry  Text="" Placeholder="Subject" x:Name="EntrySubject"/>
+                            </Frame>
+                            <Button Text="Submit"
                     Margin="10"
                     BackgroundColor="#ff5e14"
                     TextColor="White"
                     FontSize="Medium"
-                    CornerRadius="25" 
+                    CornerRadius="30" 
                     Clicked="Button_Clicked"/>
-            <Button x:Name="BtnCall"
+                            <!--  <Button x:Name="BtnCall"
                     Margin="10"
                     Text="Call Us 066#######"
                     BackgroundColor="#ff5e14"
                     TextColor="White"
                     FontSize="Medium"
                     CornerRadius="25" 
-                    Clicked="BtnCall_Clicked"/>
+                    Clicked="BtnCall_Clicked"/> -->
+
+                        </StackLayout>
+                    </Frame>
+
+                </Grid>
+               
+
+            </StackLayout>
             
-        </StackLayout>
+        </ScrollView>
+       
     </ContentPage.Content>
 </ContentPage>

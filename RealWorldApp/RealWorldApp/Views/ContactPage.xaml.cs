@@ -7,6 +7,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace RealWorldApp.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -22,10 +23,10 @@ namespace RealWorldApp.Pages
             Navigation.PopModalAsync();
         }
 
-        private void BtnCall_Clicked(object sender, EventArgs e)
-        {
-            PhoneDialer.Open("0660000000");
-        }
+        //private void BtnCall_Clicked(object sender, EventArgs e)
+        //{
+        //    PhoneDialer.Open("0660000000");
+        //}
 
         private async void Button_Clicked(object sender, EventArgs e)
         {

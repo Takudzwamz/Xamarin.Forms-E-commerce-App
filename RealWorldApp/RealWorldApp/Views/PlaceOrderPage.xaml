@@ -103,6 +103,28 @@
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="Center" />
                         </Grid>
+                        <Frame
+                            HasShadow="True"
+                           Padding="25"
+                           Margin="0,30,0,30"
+                           BorderColor="AntiqueWhite"
+                           CornerRadius="10"
+                            >
+                            <StackLayout>
+                                <Label
+                                    Text="PAYMENT PROCESS NOTICE!!!"
+								TextColor="#ff5e14"
+								FontSize="16"
+								VerticalOptions="Center" />
+                                <Label
+                                    TextColor="#09052e"
+							Text="We still don't support online payment so click on Place My Order button and your order will be made. Come back to the app after the Payfast link opens and navigate to the orders page where you will see the order you just made. Payment will be done in cash!!!." />
+                            </StackLayout>
+
+                            <!-- Text block 2 -->
+                            
+                        </Frame>
+                        
                         <Frame HasShadow="True"
                            Padding="25"
                            Margin="0,30,0,30"

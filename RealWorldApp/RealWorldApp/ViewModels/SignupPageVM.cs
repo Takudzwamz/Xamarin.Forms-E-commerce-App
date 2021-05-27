@@ -44,8 +44,8 @@ namespace RealWorldApp.ViewModels
         #region Constructor
         public SignupPageVM()
         {
-            string pp = "Pa$$w0rd";
-            RegisterData = new Register() { Email = "fzanyajibs@gmail.com", Password = pp };
+            //string pp = "Pa$$w0rd";
+            RegisterData = new Register() { };
             SignUpCommand = new Command(SignUp);
             LoginCommand = new Command(GotoLogin);
         }

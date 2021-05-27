@@ -33,8 +33,8 @@ namespace RealWorldApp.ViewModels
             LoginData = new Login();
             if (Debugger.IsAttached)
             {
-                string pp = "Pa$$w0rd";
-                LoginData = new Login() { Email = "fzanyajibs@gmail.com", Password = pp };
+               //string pp = "Pa$$w0rd";
+                LoginData = new Login() { };
             }
             LoginCommand = new Command(LoginNow);
         }

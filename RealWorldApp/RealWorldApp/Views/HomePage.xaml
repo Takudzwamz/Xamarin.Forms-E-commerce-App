@@ -14,6 +14,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid>
+            
             <CollectionView ItemsSource="{Binding ProductsCollection}"
                             SelectionMode="Single"
                             Header="{Binding .}"
@@ -22,11 +23,21 @@
                     <GridItemsLayout Orientation="Vertical"
                                      Span="1" />
                 </CollectionView.ItemsLayout>
+                
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
-
+                        
                         <StackLayout>
-                            <Label Margin="15,170,15,0"
+                          <!--  <Frame 
+                Padding="0"
+                CornerRadius="10"
+                HeightRequest="150"
+                Margin="15,145,15,0"
+                HorizontalOptions="FillAndExpand"
+                >
+                             <Image Aspect="Fill"  Source="bg.jpg"/>
+                            </Frame> -->
+                            <Label Margin="15,150,15,0"
                                Text="Product Categories"
                                TextColor="#09052e"
                                FontSize="Large"
